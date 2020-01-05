@@ -46,6 +46,9 @@ router.post('/', (req, res) => {
 					)
 				})
 		});
+
+	//window.location = '/addPhoto';
+	// add to redirect to a new location /addPhoto
 });
 
 // @route GET api/auth/user
@@ -53,6 +56,7 @@ router.post('/', (req, res) => {
 // @access Private
 
 router.get('/user', auth, (req, res) => {
+	console.log("I get called");
 	User.findById(req.user.id)
 		.select('-password')
 		.then(user => res.json(user));

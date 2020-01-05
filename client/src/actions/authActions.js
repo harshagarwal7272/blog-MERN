@@ -17,7 +17,7 @@ import {
 export const loadUser = () => (dispatch, getState) => {
 	// User loading
 	dispatch({ type: USER_LOADING });
-
+	console.log("I am loaduser");
 	axios.get('/api/auth/user', tokenConfig(getState))
 		.then(res => dispatch({
 			type: USER_LOADED,
@@ -62,12 +62,12 @@ export const login = ({ email, password }) => dispatch => {
 
 	// request body
 	const body = JSON.stringify({ email, password });
-
+	console.log("I am doing a login");
 	axios
 		.post('/api/auth', body, config)
 		.then(res =>
 			dispatch({
-				type: LOGOUT_SUCCESS,
+				type: LOGIN_SUCCESS,
 				payload: res.data
 			})
 		)
@@ -79,6 +79,31 @@ export const login = ({ email, password }) => dispatch => {
 				type: LOGIN_FAIL
 			});
 		});
+};
+
+export const addPhoto = ({ author, title, description, picture }) => (dispatch, getState) => {
+	const config = {
+		headers: {
+			'Content-type': 'application/json'
+		}
+	};
+
+	// request body
+	const body = JSON.stringify({ author, title, description, picture });
+
+	axios
+		.post('/api/posts/addPhoto', body, tokenConfig(getState))
+		.then(res =>
+			dispatch({
+				type: REGISTER_SUCCESS,
+				payload: res.data
+			})
+		)
+		.catch(err => {
+			dispatch(
+				returnErrors(err.response, err.response, 'LOGIN_FAIL')
+			);
+		});	
 };
 
 //Logout user
@@ -99,7 +124,7 @@ export const tokenConfig = (getState) => {
 			"Content-type": "application/json"
 		}
 	}
-
+	console.log(token);
 	// If token, add to headers
 	if (token) {
 		config.headers['x-auth-token'] = token;

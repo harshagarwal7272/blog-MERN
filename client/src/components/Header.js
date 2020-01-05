@@ -1,45 +1,80 @@
-import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-
+import React, { Fragment, Component } from 'react';
+import Register from './auth/Register';
+import Login from './auth/Login';
+import Logout from './auth/Logout';
+import Post from './post/AddPhoto';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import {
+	Collapse,
+	Navbar,
+	NavbarToggler,
+	NavbarBrand,
+	Nav,
+	NavItem,
+	NavLink,
+	Container
+} from 'reactstrap';
 
 class Header extends Component {
+
+	state = {
+		isOpen: false
+	}
+	toggle = () => {
+		this.setState({
+			isOpen: !this.state.isOpen
+		});
+	}
+
+	static propTypes = {
+		auth: PropTypes.object.isRequired
+	}
+
 	render() {
+
+		const { isAuthenticated, user } = this.props.auth;
+
+		const authLinks = (
+			<Fragment>
+				<NavItem>
+					<Post />
+				</NavItem>
+				<NavItem>
+					<Logout />
+				</NavItem>
+			</Fragment>
+		);
+
+		const guestLinks = (
+			<Fragment>
+				<NavItem>
+					<Register />
+				</NavItem>
+				<NavItem>
+					<Login />
+				</NavItem>
+			</Fragment>
+		);
+
 		return (
-			<nav className="navbar navbar-toggleable-md navbar-light bg-white fixed-top mediumnavigation">
-			<button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-			<span className="navbar-toggler-icon"></span>
-			</button>
-			<div className="container">
-				<a className="navbar-brand" href="index.html">
-				<img src="assets/img/logo.png" alt="logo" />
-				</a>
-				<div className="collapse navbar-collapse" id="navbarsExampleDefault">
-					<ul className="navbar-nav ml-auto">
-						<li>
-				          <NavLink exact activeClassName="active" to="/home">
-				            Stories
-				          </NavLink>
-				        </li>
-				        <li>
-				          <NavLink exact activeClassName="active" to="/post">
-				            Post
-				          </NavLink>
-				        </li>
-				        <li>
-				          <NavLink exact activeClassName="active" to="/author">
-				            Author
-				          </NavLink>
-				        </li>
-					</ul>
-					<form className="form-inline my-2 my-lg-0">
-						<input className="form-control mr-sm-2" type="text" placeholder="Search" />
-						<span className="search-icon"><svg className="svgIcon-use" width="25" height="25" viewBox="0 0 25 25"><path d="M20.067 18.933l-4.157-4.157a6 6 0 1 0-.884.884l4.157 4.157a.624.624 0 1 0 .884-.884zM6.5 11c0-2.62 2.13-4.75 4.75-4.75S16 8.38 16 11s-2.13 4.75-4.75 4.75S6.5 13.62 6.5 11z"></path></svg></span>
-					</form>
-				</div>
-			</div>
-			</nav>
+			<Navbar color="dark" dark expand="sm" className="mb-5">
+				<Container>
+					<NavbarBrand href="/">Blog</NavbarBrand>
+					<NavbarToggler onClick={this.toggle} />
+					<Collapse isOpen={this.state.isOpen} navbar>
+						<Nav className="ml-auto" navbar>
+							{ isAuthenticated ? authLinks : guestLinks }
+						</Nav>
+					</Collapse>
+				</Container>
+			</Navbar>
 		)
 	}
 }
 
-export default Header;
+const mapStateToProps = state => ({
+	auth: state.auth
+});
+
+export default connect(mapStateToProps, null)(Header);

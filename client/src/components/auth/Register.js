@@ -79,20 +79,24 @@ class RegisterModal extends Component {
 		//Attempt to register
 		this.props.register(newUser);
 
-		window.location.href = 'https://www.google.co.in';
+//		window.location = '/addPhoto';
 
 		// register to a new page after registering the user && remove modal
-	}
-
-	goToLogin = e => {
-		e.preventDefault();
-
-		window.location.href = '/login';
 	}
 
 	render() {
 		return (
 			<div>
+				<NavLink onClick={this.toggle} href="#">
+					Register
+				</NavLink>
+
+				<Modal
+					isOpen={this.state.modal}
+					toggle={this.toggle}
+				>
+					<ModalHeader toggle={this.toggle}>Register</ModalHeader>
+					<ModalBody>
 				{ this.state.msg ? <Alert color="danger">{ this.state.msg } </Alert> : null }
 				<Form style={{paddingTop:'2rem'}} onSubmit={this.onSubmit}>
 					<FormGroup>
@@ -133,12 +137,8 @@ class RegisterModal extends Component {
 						>Register</Button>
 					</FormGroup>
 				</Form>
-				<Button
-					color="dark"
-					style={{}}
-					block
-					onClick={this.goToLogin}
-				>Already registered ??? Sign In</Button>
+				</ModalBody>
+				</Modal>
 			</div>
 		);
 	}

@@ -5,7 +5,7 @@ const config = require('config');
 const jwt = require('jsonwebtoken');
 
 //User Model
-const Item = require('../../models/User');
+const User = require('../../models/User');
 
 // @route POST api/users
 // @desc Register new user
@@ -17,6 +17,9 @@ router.post('/', (req, res) => {
 	if (!name || !email || !password) {
 		return res.status(400).json({ msg: 'Please enter all fields' });
 	}
+
+	console.log(name);
+	console.log(email);
 
 	//Check for existing user
 	User.findOne({email})
