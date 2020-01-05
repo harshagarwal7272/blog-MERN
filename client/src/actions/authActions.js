@@ -81,31 +81,6 @@ export const login = ({ email, password }) => dispatch => {
 		});
 };
 
-export const addPhoto = ({ author, title, description, picture }) => (dispatch, getState) => {
-	const config = {
-		headers: {
-			'Content-type': 'application/json'
-		}
-	};
-
-	// request body
-	const body = JSON.stringify({ author, title, description, picture });
-
-	axios
-		.post('/api/posts/addPhoto', body, tokenConfig(getState))
-		.then(res =>
-			dispatch({
-				type: REGISTER_SUCCESS,
-				payload: res.data
-			})
-		)
-		.catch(err => {
-			dispatch(
-				returnErrors(err.response, err.response, 'LOGIN_FAIL')
-			);
-		});	
-};
-
 //Logout user
 export const logout = () => {
 	return {
@@ -124,7 +99,6 @@ export const tokenConfig = (getState) => {
 			"Content-type": "application/json"
 		}
 	}
-	console.log(token);
 	// If token, add to headers
 	if (token) {
 		config.headers['x-auth-token'] = token;

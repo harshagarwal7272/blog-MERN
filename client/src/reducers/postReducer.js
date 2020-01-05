@@ -1,5 +1,5 @@
 import uuid from 'uuid';
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from '../actions/types';
+import { POST_SUCCESS, GET_ITEMS, ADD_ITEM, ITEMS_LOADING } from '../actions/types';
 
 const initialState = {
 	posts: [],
@@ -14,10 +14,13 @@ export default function(state = initialState, action) {
 				posts: action.payload,
 				loading: false
 			};
-		case DELETE_ITEM:
+		case POST_SUCCESS:
+			localStorage.setItem('token', action.payload.token);
 			return {
 				...state,
-				items: state.items.filter(item => item._id !== action.payload)
+				...action.payload,
+				isAuthenticated: true,
+				isLoading: false
 			};
 		case ADD_ITEM:
 			return {

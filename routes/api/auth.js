@@ -46,9 +46,6 @@ router.post('/', (req, res) => {
 					)
 				})
 		});
-
-	//window.location = '/addPhoto';
-	// add to redirect to a new location /addPhoto
 });
 
 // @route GET api/auth/user

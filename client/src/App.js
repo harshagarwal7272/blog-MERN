@@ -9,10 +9,7 @@ import store from './store';
 import { loadUser } from './actions/authActions';
 import Home from './pages/home';
 
-// to do ....
-// change add photo to add post everywhere
-// file upload form doesn't show msg .... check.. .form is submitted even on empty data.
-// error handling if post with the exact same title exists
+// change the upload folder inside client
 
 class App extends Component {
 

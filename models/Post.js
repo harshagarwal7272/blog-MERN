@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-//User Schema
-const StorySchema = new Schema({
+//Post Schema
+const PostSchema = new Schema({
 	author: {
 		type: String,
 		required: true
@@ -19,7 +19,7 @@ const StorySchema = new Schema({
 		type: Number,
 		required: true
 	},
-	picture: {
+	imageID: {
 		type: String,
 		required: true
 	},
@@ -29,4 +29,4 @@ const StorySchema = new Schema({
 	}
 });
 
-module.exports = Story = mongoose.model('story', StorySchema);
+module.exports = Post = mongoose.model('post', PostSchema);

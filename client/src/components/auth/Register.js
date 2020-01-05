@@ -78,10 +78,6 @@ class RegisterModal extends Component {
 
 		//Attempt to register
 		this.props.register(newUser);
-
-//		window.location = '/addPhoto';
-
-		// register to a new page after registering the user && remove modal
 	}
 
 	render() {

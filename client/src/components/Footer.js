@@ -5,7 +5,7 @@ class Footer extends Component {
 		return (
 			<div className="footer">
 				<p className="pull-left">
-					 Copyright &copy; 2017 Your Website Name
+					 Copyright &copy; 2020 Mediumish
 				</p>
 				<p className="pull-right">
 					 Mediumish Theme by <a target="_blank" href="https://www.wowthemes.net">WowThemes.net</a>

@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import {
 	Button,
 	Modal,
@@ -8,28 +8,27 @@ import {
 	FormGroup,
 	Label,
 	Input,
-	NavLink,
-	Alert
+	NavLink
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addPhoto } from '../../actions/authActions';
+import { addPost } from '../../actions/postActions';
 import { clearErrors } from '../../actions/errorActions';
 import axios from 'axios';
 
-class AddPhoto extends Component {
+class AddPost extends Component {
 
 	state = {
 		modal: false,
 		title: '',
 		description: '',
 		msg: null,
-		picture: null
+		imageID: null
 	}
 
 	static propTypes = {
 		auth: PropTypes.object.isRequired,
-		addPhoto: PropTypes.func.isRequired
+		addPost: PropTypes.func.isRequired
 	}
 
 	onChange = (e) => {
@@ -39,18 +38,12 @@ class AddPhoto extends Component {
 	uploadImage = (e) => {
 		e.preventDefault();
 
-		console.log(e.target.files[0]);
-
 		const currentTime = Date.now();
-
 		this.setState({
-			picture: currentTime + "_" + e.target.files[0].name
+			imageID: currentTime + "_" + e.target.files[0].name
 		});
 
 		let imageFormObj = new FormData();
-
-		console.log(e.target);
-
 		imageFormObj.append("imageID", currentTime + "_" + e.target.files[0].name);
 		imageFormObj.append("imageData", e.target.files[0]);
 
@@ -68,22 +61,20 @@ class AddPhoto extends Component {
 	onSubmit = e => {
 		e.preventDefault();
 
-		console.log(this.state.picture);
-
 		const { user, isAuthenticated } = this.props.auth;
 		const author = user.name;
-		const { title, description, picture } = this.state;
+		const { title, description, imageID } = this.state;
 
 		//Create post object
 		const newPost = {
 			author,
 			title,
 			description,
-			picture
+			imageID
 		};
 
 		//Attempt to addPost
-		this.props.addPhoto(newPost);
+		this.props.addPost(newPost);
 
 		// close modal
 		this.toggle();
@@ -111,7 +102,6 @@ class AddPhoto extends Component {
 				>
 					<ModalHeader toggle={this.toggle}>Add Post</ModalHeader>
 					<ModalBody>
-				{ this.state.msg ? <Alert color="danger">{ this.state.msg } </Alert> : null }
 				<Form onSubmit={this.onSubmit}>
 					<FormGroup>
 						<Label for="title">Title</Label>
@@ -138,8 +128,8 @@ class AddPhoto extends Component {
 						/>
 						<Input
 							type="file"
-							name="picture"
-							id="picture"
+							name="imageID"
+							id="imageID"
 							placeholder="Add Picture"
 							className="mb-3"
 							onChange={(e) => this.uploadImage(e)}
@@ -164,4 +154,4 @@ const mapStateToProps = state => ({
 	error: state.error
 });
 
-export default connect(mapStateToProps, { addPhoto, clearErrors })(AddPhoto);
+export default connect(mapStateToProps, { addPost, clearErrors })(AddPost);

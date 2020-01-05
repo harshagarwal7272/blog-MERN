@@ -2,7 +2,7 @@ import React, { Fragment, Component } from 'react';
 import Register from './auth/Register';
 import Login from './auth/Login';
 import Logout from './auth/Logout';
-import Post from './post/AddPhoto';
+import Post from './post/AddPost';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -12,7 +12,6 @@ import {
 	NavbarBrand,
 	Nav,
 	NavItem,
-	NavLink,
 	Container
 } from 'reactstrap';
 
