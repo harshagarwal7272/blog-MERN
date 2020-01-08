@@ -18,17 +18,48 @@ router.get('/', (req, res) => {
 	console.log("Fetching posts");
 	Post.find()
 		.sort({date: -1})
-		.then(items => res.json(items))
+		.then((items) => {
+			let imageIds = items.map(item => item.imageID);
+			Image.find({
+			    'imageID': { $in: imageIds }
+			}).then((images)=>{
+				// console.log(images);
+				let completeItems = [];
+				for(let i=0; i<items.length; i++){
+					for(let j=0; j<images.length; j++){
+						if(items[i].imageID == images[j].imageID){
+							let completeItem = {};
+							completeItem.imageData  = images[j].imageData;
+							completeItem._id  = items[j]._id;
+							completeItem.author  = items[j].author;
+							completeItem.title  = items[j].title;
+							completeItem.description  = items[j].description;
+							completeItem.read_duration  = items[j].read_duration;
+							completeItem.imageID  = items[j].imageID;
+							completeItem.date  = items[j].date;
+
+							completeItems.push(completeItem);
+							break;
+						}
+					}
+				}
+	
+				res.json(completeItems);
+			})
+		})
 });
+
 
 
 // @route POST api/posts
 // @desc Post
 // @access Private
 
-router.post('/addPost', auth, (req, res) => {
+router.post('/addPost', (req, res) => {
 	const { author, title, description, imageID } = req.body;
 	
+	console.log("I am trying to add a post");
+
 	let description_split = description.split(' ');
 	const read_duration = Math.ceil(((description_split.length) / 200));
 

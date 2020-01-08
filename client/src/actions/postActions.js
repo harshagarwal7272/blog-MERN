@@ -9,8 +9,15 @@ export const addPost = ({ author, title, description, imageID }) => (dispatch, g
 	// request body
 	const body = JSON.stringify({ author, title, description, imageID });
 
+	// Headers
+	const config = {
+		headers: {
+			"Content-type": "application/json"
+		}
+	}
+
 	axios
-		.post('/api/posts/addPost', body, tokenConfig(getState))
+		.post('/api/posts/addPost', body, config)
 		.then(res =>
 			dispatch({
 				type: POST_SUCCESS,

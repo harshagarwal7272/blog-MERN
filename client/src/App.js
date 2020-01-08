@@ -9,6 +9,8 @@ import store from './store';
 import { loadUser } from './actions/authActions';
 import Home from './pages/home';
 
+
+// new page for stories
 // no automatic refresh of article upload.... fix it
 
 class App extends Component {

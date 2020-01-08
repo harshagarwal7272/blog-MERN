@@ -60,4 +60,24 @@ router.post('/', (req, res) => {
 		});
 });
 
+
+router.post('/social', (req, res) => {
+	console.log("I am in");
+
+	const { name, email } = req.body;
+
+	console.log(name);
+	console.log(email);
+
+	const socialAuth = true;
+
+	res.json({
+		socialAuth,
+		user: {
+			name: name,
+			emai: email
+		}
+	})
+});
+
 module.exports = router;

@@ -13,7 +13,8 @@ const initialState = {
 	token: localStorage.getItem('token'),
 	isAuthenticated: null,
 	isLoading: false,
-	user: null
+	user: null,
+	socialAuth: false
 };
 
 export default function(state = initialState, action) {
@@ -44,6 +45,7 @@ export default function(state = initialState, action) {
 		case LOGOUT_SUCCESS:
 		case REGISTER_FAIL:
 			localStorage.removeItem('token');
+			sessionStorage.removeItem('socialUserData');
 			return {
 				...state,
 				token: null,

@@ -15,6 +15,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';
+import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 
 class LoginModal extends Component {
 	state = {
@@ -48,6 +50,53 @@ class LoginModal extends Component {
 				this.toggle();
 			}
 		}
+	}
+
+		responseGoogle = (response) => {
+	    console.log("google console");
+	    console.log(response.w3.ig);
+	    console.log(response.w3.U3);
+
+	    const name = response.w3.ig;
+	    const email = response.w3.U3;
+
+	    this.setState({
+	    	name: name,
+	    	email: email
+	    });
+	    const newUser = {
+	    	name,
+	    	email
+	    };
+
+	    // i am setting social user data
+	    sessionStorage.setItem("socialUserData", JSON.stringify(newUser));
+
+	    // Attempt to register
+	    this.props.social_auth(newUser);
+	}
+
+	responseFacebook = (response) => {
+		console.log("facebook console");
+		console.log(response);
+		const name = response.name;
+		const email = response.email;
+
+	    this.setState({
+	    	name: name,
+	    	email: email
+	    });
+	    const newUser = {
+	    	name,
+	    	email
+	    };
+
+	    // i am setting social user data
+	    sessionStorage.setItem("socialUserData", JSON.stringify(newUser));
+
+	    // Attempt to register
+	    this.props.social_auth(newUser);
+
 	}
 
 
@@ -121,6 +170,16 @@ class LoginModal extends Component {
 						>Login</Button>
 					</FormGroup>
 				</Form>
+				<GoogleLogin
+					clientId="1068239361892-dao96nieulbcm2otq3ihu1cfasfusc25.apps.googleusercontent.com"
+					buttonText="SignIn with Google"
+					onSuccess={this.responseGoogle}
+					onFailure={this.responseGoogle}/>
+				<FacebookLogin
+					appId="1062401724117024"
+					autoLoad={false}
+					fields="name,email,picture"
+					callback={this.responseFacebook}/>
 			</ModalBody>
 				</Modal>
 			</div>

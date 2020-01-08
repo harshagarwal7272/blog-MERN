@@ -18,15 +18,25 @@ export const loadUser = () => (dispatch, getState) => {
 	// User loading
 	dispatch({ type: USER_LOADING });
 	console.log("I am loaduser");
-	axios.get('/api/auth/user', tokenConfig(getState))
-		.then(res => dispatch({
+
+	let userData = JSON.parse(sessionStorage.getItem('socialUserData'));
+	console.log(userData);
+	if (userData) {
+		dispatch({
 			type: USER_LOADED,
-			payload: res.data
-		}))
-		.catch(err => {
-			dispatch(returnErrors(err.response.data, err.response.status));
-			dispatch({ type: AUTH_ERROR });
-		});
+			payload: userData
+		})
+	} else {
+		axios.get('/api/auth/user', tokenConfig(getState))
+			.then(res => dispatch({
+				type: USER_LOADED,
+				payload: res.data
+			}))
+			.catch(err => {
+				dispatch(returnErrors(err.response.data, err.response.status));
+				dispatch({ type: AUTH_ERROR });
+			});
+		}
 };
 
 //Register User
@@ -50,6 +60,30 @@ export const register = ({ name, email, password }) => dispatch => {
 				type: REGISTER_FAIL
 			});
 		});
+};
+
+// Login user for social auth
+export const social_auth = ({ name, email}) => dispatch => {
+	
+	// Headers
+	const config = {
+		headers: {
+			'Content-type': 'application/json'
+		}
+	};
+
+	const body = JSON.stringify({ name, email });
+
+	axios.post('/api/users/social', body, config)
+		.then(res => dispatch({
+		type: REGISTER_SUCCESS,
+		payload: res.data
+	}))
+	.catch(err => {
+		dispatch({
+			type: REGISTER_FAIL
+		});
+	})
 };
 
 //Login user

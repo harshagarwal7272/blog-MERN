@@ -54,6 +54,7 @@ router.post('/', (req, res) => {
 
 router.get('/user', auth, (req, res) => {
 	console.log("I get called");
+	
 	User.findById(req.user.id)
 		.select('-password')
 		.then(user => res.json(user));
