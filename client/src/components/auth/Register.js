@@ -15,6 +15,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { register } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';
+import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 
 class RegisterModal extends Component {
 	state = {
@@ -51,6 +53,10 @@ class RegisterModal extends Component {
 		}
 	}
 
+	responseGoogle = (response) => {
+	    console.log("google console");
+	    console.log(response);
+	}
 
 	toggle = () => {
 		//clear erros
@@ -133,6 +139,11 @@ class RegisterModal extends Component {
 						>Register</Button>
 					</FormGroup>
 				</Form>
+				<GoogleLogin
+					clientId="1068239361892-dao96nieulbcm2otq3ihu1cfasfusc25.apps.googleusercontent.com"
+					buttonText="SignUp with Google"
+					onSuccess={this.responseGoogle}
+					onFailure={this.responseGoogle}/>
 				</ModalBody>
 				</Modal>
 			</div>

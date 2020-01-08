@@ -9,7 +9,7 @@ import store from './store';
 import { loadUser } from './actions/authActions';
 import Home from './pages/home';
 
-// change the upload folder inside client
+// no automatic refresh of article upload.... fix it
 
 class App extends Component {
 
