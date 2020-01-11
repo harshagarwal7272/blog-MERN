@@ -30,13 +30,13 @@ router.get('/', (req, res) => {
 						if(items[i].imageID == images[j].imageID){
 							let completeItem = {};
 							completeItem.imageData  = images[j].imageData;
-							completeItem._id  = items[j]._id;
-							completeItem.author  = items[j].author;
-							completeItem.title  = items[j].title;
-							completeItem.description  = items[j].description;
-							completeItem.read_duration  = items[j].read_duration;
-							completeItem.imageID  = items[j].imageID;
-							completeItem.date  = items[j].date;
+							completeItem._id  = items[i]._id;
+							completeItem.author  = items[i].author;
+							completeItem.title  = items[i].title;
+							completeItem.description  = items[i].description;
+							completeItem.read_duration  = items[i].read_duration;
+							completeItem.imageID  = items[i].imageID;
+							completeItem.date  = items[i].date;
 
 							completeItems.push(completeItem);
 							break;
@@ -73,6 +73,23 @@ router.post('/addPost', (req, res) => {
 
 	newPost.save();
 
+});
+
+// @route GET api/posts
+// @desc Get
+// @access Public
+
+router.post('/story', (req, res) => {
+	const { _id } = req.body;
+
+	console.log("This api is getting hit");
+
+	console.log(_id);
+
+	Post.find({_id:_id})
+		.then((item) => {
+			res.json(item);
+		});
 });
 
 module.exports = router;
