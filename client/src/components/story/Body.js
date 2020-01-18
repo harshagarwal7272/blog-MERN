@@ -8,11 +8,22 @@ class Body extends Component {
 
 	componentDidMount() {
 		const storyID = this.props.storyID;
-		this.props.getStory(storyID);
+		const id = {
+			_id: storyID
+		}
+		this.props.getStory(id);
+	}
+
+	static propTypes = {
+		auth: PropTypes.object.isRequired,
+		post: PropTypes.object.isRequired
 	}
 
 	render() {
-		const story = this.props.story;
+		const { story } = this.props.post;
+		console.log("The story is: ");
+		console.log(story);
+
 
 		return (
 			<div>
@@ -45,7 +56,7 @@ class Body extends Component {
 				</ul>
 			</div>
 		</div>
-		<PostTemplate />
+		<PostTemplate storyDetails={(story)?story[0]:undefined}/>
 	</div>
 </div>
 
@@ -69,7 +80,8 @@ Body.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-
+	post: state.post,
+	auth: state.auth
 });
 
 export default connect(
