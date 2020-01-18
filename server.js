@@ -31,7 +31,7 @@ mongoose.connect(db, {
 	.catch(err => console.log(err));
 
 //Use routes
-app.use("/api/users/author", require("./routes/api/users"));
+app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/posts", require("./routes/api/posts"));
 app.use('/image', require("./routes/api/image"));

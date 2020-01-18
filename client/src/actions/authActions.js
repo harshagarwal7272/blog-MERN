@@ -10,7 +10,9 @@ import {
 	LOGIN_FAIL,
 	LOGOUT_SUCCESS,
 	REGISTER_SUCCESS,
-	REGISTER_FAIL
+	REGISTER_FAIL,
+	GET_AUTHOR_SUCCESS,
+	GET_AUTHOR_FAIL
 } from './types';
 
 // Check token and load user
@@ -82,6 +84,31 @@ export const social_auth = ({ name, email }) => dispatch => {
 	.catch(err => {
 		dispatch({
 			type: REGISTER_FAIL
+		});
+	})
+};
+
+// Get author details
+export const getAuthorDetails = ({ userEmail }) => dispatch => {
+	// Headers
+	const config = {
+		headers: {
+			'Content-type': 'application/json'
+		}
+	};
+
+	console.log("I am gerindoksnafkjdancf");
+
+	const body = JSON.stringify({ userEmail });
+
+	axios.get('/api/users/author/'+userEmail, body, config)
+		.then(res => dispatch({
+		type: GET_AUTHOR_SUCCESS,
+		payload: res.data
+	}))
+	.catch(err => {
+		dispatch({
+			type: GET_AUTHOR_FAIL
 		});
 	})
 };

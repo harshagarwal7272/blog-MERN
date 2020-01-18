@@ -16,7 +16,7 @@ class Author extends Component {
 			<div>
 				<Header />
 					<div className="container">
-						<Title />
+						<Title userEmail={email} />
 						<Body userEmail={email} />
 					</div>
 				<Footer />

@@ -7,7 +7,7 @@ const fs = require('fs');
 const multer = require('multer');
 const auth = require('../../middleware/auth');
 
-//User Model
+//Post Model
 const Post = require('../../models/Post');
 
 // @route api/posts
@@ -16,16 +16,26 @@ const Post = require('../../models/Post');
 
 
 //:userEmail
-router.get('/', (req, res) => {
-	// console.log("Fetching posts");
+router.post('/', (req, res) => {
+	console.log("Fetching posts");
 
-	// console.log(req.params.userEmail);
+	const { userEmail } = req.body;
 
+	console.log(userEmail);
+
+	let criteria = {}
+
+	if (userEmail) {
+		criteria = {
+			authorEmail: userEmail
+		}
+	}
 	// filter and return requests based on unique-User or userEmail
 
-	Post.find()
+	Post.find(criteria)
 		.sort({date: -1})
 		.then((items) => {
+			console.log("Items are : " + items);
 			let imageIds = items.map(item => item.imageID);
 			Image.find({
 			    'imageID': { $in: imageIds }

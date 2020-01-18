@@ -55,16 +55,25 @@ export const getStory = ({ _id }) => ( dispatch, getState ) => {
 	}
 
 //create a new variant of getPosts 
-export const getPosts = () => ( dispatch ) => {
+export const getPosts = ({ userEmail }) => ( dispatch ) => {
 
-	// console.log("phew ");
-	// console.log(userEmail);
+	console.log("phew ");
+	console.log(userEmail);
 
 	dispatch(setItemsLoading());
 	console.log("I went asking for items");
 
+	// Headers
+	const config = {
+		headers: {
+			"Content-type": "application/json"
+		}
+	}
+
+	const body = JSON.stringify({ userEmail });
+
 	axios
-		.get('/api/posts/')// + userEmail)
+		.post('/api/posts', body, config)
 		.then(res =>
 			dispatch({
 				type: GET_ITEMS,
@@ -72,7 +81,7 @@ export const getPosts = () => ( dispatch ) => {
 			})
 		)
 		.catch(err => {
-			dispatch(returnErrors(err.response.data, err.response.status));
+			dispatch(returnErrors(err.response, err.response.status));
 		});
 };
 

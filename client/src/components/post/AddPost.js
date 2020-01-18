@@ -33,7 +33,11 @@ class AddPost extends Component {
 	}
 
 	componentDidMount() {
-		this.props.getPosts();
+		const { userEmail } = this.props.userEmail;
+		const email = {
+			userEmail : userEmail
+		}
+		this.props.getPosts(email);
 	}
 
 	onChange = (e) => {

@@ -6,7 +6,9 @@ import {
 	LOGIN_FAIL,
 	LOGOUT_SUCCESS,
 	REGISTER_SUCCESS,
-	REGISTER_FAIL
+	REGISTER_FAIL,
+	GET_AUTHOR_SUCCESS,
+	GET_AUTHOR_FAIL
 } from '../actions/types';
 
 const initialState = {
@@ -14,7 +16,9 @@ const initialState = {
 	isAuthenticated: null,
 	isLoading: false,
 	user: null,
-	socialAuth: false
+	socialAuth: false,
+	authorData: null,
+	authorExists: false
 };
 
 export default function(state = initialState, action) {
@@ -51,6 +55,18 @@ export default function(state = initialState, action) {
 				token: null,
 				user: null,
 				isAuthenticated: false,
+				isLoading: false
+			}
+		case GET_AUTHOR_SUCCESS:
+			return {
+				...state,
+				isLoading: false,
+				authorData: action.payload,
+				authorExists: true
+			}
+		case GET_AUTHOR_FAIL:
+			return {
+				...state,
 				isLoading: false
 			}
 		default:

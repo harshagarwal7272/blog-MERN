@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 //User Model
 const User = require('../../models/User');
 const SocialUser = require('../../models/SocialUser');
+const Post = require('../../models/Post');
 
 // @route POST api/users
 // @desc Register new user
@@ -119,10 +120,17 @@ router.post('/social', (req, res) => {
 	});
 });
 
-router.get('/:userEmail', (req, res) => {
+router.get('/author/:userEmail', (req, res) => {
 
 	const userEmail = req.params.userEmail;
+	console.log("Do i ever get claled");
 	console.log(userEmail);
+
+	SocialUser.find({ "email": userEmail })
+		.then((authorData) => {
+			console.log("author data : " + authorData);
+			res.json(authorData);
+		});
 
 	// find the author details from the relevant users database 
 	// add an array in the users database so that the followers of the author can be added their
@@ -130,3 +138,9 @@ router.get('/:userEmail', (req, res) => {
 });
 
 module.exports = router;
+
+// get all the posts written by a author unique by email ID
+// Post.find({authorEmail:"harshagarwal7272@gmail.com"})
+// 		.then((items) => {
+// 			res.json(items);
+// 		})

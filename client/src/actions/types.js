@@ -14,3 +14,5 @@ export const ADD_ITEM = 'ADD_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const POST_SUCCESS = 'POST_SUCCESS';
 export const GET_STORY = 'GET_STORY';
+export const GET_AUTHOR_SUCCESS = 'GET_AUTHOR_SUCCESS';
+export const GET_AUTHOR_FAIL = 'GET_AUTHOR_FAIL';

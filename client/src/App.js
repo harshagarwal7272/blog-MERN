@@ -10,8 +10,6 @@ import Home from './pages/home';
 import Story from './pages/story';
 import Author from './pages/author';
 
-
-// new page for stories
 // no automatic refresh of article upload.... fix it
 
 class App extends Component {
