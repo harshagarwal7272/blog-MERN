@@ -32,14 +32,6 @@ class AddPost extends Component {
 		getPosts: PropTypes.func.isRequired
 	}
 
-	componentDidMount() {
-		const { userEmail } = this.props.userEmail;
-		const email = {
-			userEmail : userEmail
-		}
-		this.props.getPosts(email);
-	}
-
 	onChange = (e) => {
 		this.setState({ [e.target.name]: e.target.value });
 	};

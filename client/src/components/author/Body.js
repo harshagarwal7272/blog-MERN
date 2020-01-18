@@ -7,7 +7,6 @@ import PostTemplate from './PostTemplate';
 class Body extends Component {
 
 	componentDidMount() {
-		console.log("hihi " + this.props.userEmail);
 		const email = {
 			userEmail: this.props.userEmail
 		}
@@ -15,34 +14,21 @@ class Body extends Component {
 	}
 
 	render() {
+		const { authorData } = this.props.auth;
 
-		const { authorData, authorExists } = this.props.auth;
-		console.log("authorData is (from body): " + authorData);
+		let userDoesNotExist = true;
 
-		console.log(authorExists);
-
-		let userDoesNotExist = false;
-
-		if (!authorData) {
+		if (authorData && authorData[0] && authorData[0].email) {
 			userDoesNotExist = false;
 		}
 
-		console.log("userDoesNotExist " + userDoesNotExist);
-
-		const { isAuthenticated, user } = this.props.auth;
-
 		const email = this.props.userEmail;
-		console.log("hey " + email);
-
-		const { posts } = this.props.post;
-		console.log(posts);
 
 		const userExists = (
 			<Fragment>
 				<div className="graybg authorpage">
-					<PostTemplate />
+					<PostTemplate userEmail={this.props.userEmail} />
 				</div>
-
 				<div className="container margtop3rem">
 				<a className="twitter-grid" href="https://twitter.com/TwitterDev/timelines/539487832448843776">WowThemesNet Tweets</a> <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
 				</div>
@@ -51,7 +37,7 @@ class Body extends Component {
 
 		return (
 			<div>
-				{ authorExists ? userExists : '' }
+				{ userDoesNotExist ? '' : userExists }
 			</div>
 			)
 	}
