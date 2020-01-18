@@ -13,7 +13,7 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { login } from '../../actions/authActions';
+import { login, social_auth } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
@@ -52,7 +52,7 @@ class LoginModal extends Component {
 		}
 	}
 
-		responseGoogle = (response) => {
+	responseGoogle = (response) => {
 	    console.log("google console");
 	    console.log(response.w3.ig);
 	    console.log(response.w3.U3);
@@ -69,8 +69,8 @@ class LoginModal extends Component {
 	    	email
 	    };
 
-	    // i am setting social user data
-	    sessionStorage.setItem("socialUserData", JSON.stringify(newUser));
+	    // // i am setting social user data
+	    // sessionStorage.setItem("socialUserData", JSON.stringify(newUser));
 
 	    // Attempt to register
 	    this.props.social_auth(newUser);
@@ -192,4 +192,4 @@ const mapStateToProps = state => ({
 	error: state.error
 });
 
-export default connect(mapStateToProps, { login, clearErrors })(LoginModal);
+export default connect(mapStateToProps, { login, social_auth, clearErrors })(LoginModal);

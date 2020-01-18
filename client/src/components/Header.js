@@ -14,6 +14,9 @@ import {
 	NavItem,
 	Container
 } from 'reactstrap';
+import {
+	Link
+} from 'react-router-dom';
 
 class Header extends Component {
 
@@ -36,6 +39,9 @@ class Header extends Component {
 
 		const authLinks = (
 			<Fragment>
+				<NavItem>
+					<Link to={'/author'}> Author </Link>
+				</NavItem>
 				<NavItem>
 					<Post />
 				</NavItem>

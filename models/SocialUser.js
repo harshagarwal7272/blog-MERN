@@ -3,24 +3,19 @@ const Schema = mongoose.Schema;
 
 //SocialUser Schema
 const SocialUserSchema = new Schema({
-	userName: String,
+	name: {
+		type: String,
+		required: true
+	},
 	email: {
 		type: String,
 		required: true,
-		trim: true
+		trim: true,
+		unique: true
 	},
-
-	thumbnail:String,
-	gender: String,
-
-	//this can be any id, google, facebook or linkedin ; this will be unique
-	accountId: {
-		type: String,
-		required: true,
-		index: { unique: true },
-		trim: true
-	},
-	provider: String
+	facebookProfileLink: {
+		type: String
+	}
 });
 
 module.exports = SocialUser = mongoose.model('socialuser', SocialUserSchema);

@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 
 //User Model
 const User = require('../../models/User');
+const SocialUser = require('../../models/SocialUser');
 
 // @route POST api/users
 // @desc Register new user
@@ -51,15 +52,13 @@ router.post('/', (req, res) => {
 											email: user.email
 										}
 									});
-								}
-							)
+								});
 						});
 				});
 			});
 
 		});
 });
-
 
 router.post('/social', (req, res) => {
 	console.log("I am in");
@@ -71,13 +70,63 @@ router.post('/social', (req, res) => {
 
 	const socialAuth = true;
 
-	res.json({
-		socialAuth,
-		user: {
-			name: name,
-			emai: email
+	SocialUser.findOne({email})
+	.then(user => {
+		if (user) {
+			jwt.sign(
+				{ id: user.id },
+				config.get('jwtSecret'),
+				{ expiresIn: 3600 },
+				(err, token) => {
+					if (err) throw err;
+					res.json({
+						token,
+						user: {
+							id: user.id,
+							name: user.name,
+							email: user.email
+						}
+					});
+				}
+			)
+			return;
 		}
-	})
+
+		// add a check if it is facebook login, add the facebook profile link of the user
+		const newUser = new SocialUser({
+			name,
+			email
+		});
+
+		newUser.save()
+			.then(user => {
+				jwt.sign(
+					{ id: user.id },
+					config.get('jwtSecret'),
+					{ expiresIn: 3600 },
+					(err, token) => {
+						if (err) throw err;
+						res.json({
+							token,
+							user: {
+								id: user.id,
+								name: user.name,
+								email: user.email
+							}
+						});
+					});
+			});
+	});
+});
+
+router.get('/:userEmail', (req, res) => {
+
+	const userEmail = req.params.userEmail;
+	console.log(userEmail);
+
+	// find the author details from the relevant users database 
+	// add an array in the users database so that the followers of the author can be added their
+
 });
 
 module.exports = router;

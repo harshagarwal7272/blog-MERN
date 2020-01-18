@@ -71,8 +71,8 @@ class RegisterModal extends Component {
 	    	email
 	    };
 
-	    // i am setting social user data
-	    sessionStorage.setItem("socialUserData", JSON.stringify(newUser));
+	    // // i am setting social user data
+	    // sessionStorage.setItem("socialUserData", JSON.stringify(newUser));
 
 	    // Attempt to register
 	    this.props.social_auth(newUser);

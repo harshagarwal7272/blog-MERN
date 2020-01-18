@@ -6,7 +6,8 @@ const jwt = require('jsonwebtoken');
 const auth = require('../../middleware/auth');
 
 //User Model
-const Item = require('../../models/User');
+const User = require('../../models/User');
+const SocialUser = require('../../models/SocialUser');
 
 // @route POST api/auth
 // @desc Auth user
@@ -55,8 +56,7 @@ router.post('/', (req, res) => {
 router.get('/user', auth, (req, res) => {
 	console.log("I get called");
 	
-	User.findById(req.user.id)
-		.select('-password')
+	SocialUser.findById(req.user.id)
 		.then(user => res.json(user));
 });
 

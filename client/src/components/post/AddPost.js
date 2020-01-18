@@ -12,7 +12,7 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addPost } from '../../actions/postActions';
+import { addPost, getPosts } from '../../actions/postActions';
 import { clearErrors } from '../../actions/errorActions';
 import axios from 'axios';
 
@@ -28,7 +28,12 @@ class AddPost extends Component {
 
 	static propTypes = {
 		auth: PropTypes.object.isRequired,
-		addPost: PropTypes.func.isRequired
+		addPost: PropTypes.func.isRequired,
+		getPosts: PropTypes.func.isRequired
+	}
+
+	componentDidMount() {
+		this.props.getPosts();
 	}
 
 	onChange = (e) => {
@@ -63,11 +68,13 @@ class AddPost extends Component {
 
 		const { user, isAuthenticated } = this.props.auth;
 		const author = user.name;
+		const authorEmail = user.email;
 		const { title, description, imageID } = this.state;
 
 		//Create post object
 		const newPost = {
 			author,
+			authorEmail,
 			title,
 			description,
 			imageID
@@ -154,4 +161,4 @@ const mapStateToProps = state => ({
 	error: state.error
 });
 
-export default connect(mapStateToProps, { addPost, clearErrors })(AddPost);
+export default connect(mapStateToProps, { addPost, getPosts, clearErrors })(AddPost);

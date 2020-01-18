@@ -13,3 +13,4 @@ export const ITEMS_LOADING = 'ITEMS_LOADING';
 export const ADD_ITEM = 'ADD_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const POST_SUCCESS = 'POST_SUCCESS';
+export const GET_STORY = 'GET_STORY';

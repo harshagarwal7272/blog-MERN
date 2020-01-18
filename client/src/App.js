@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import './App.css';
 
 import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/authActions';
 import Home from './pages/home';
+import Story from './pages/story';
+import Author from './pages/author';
 
 
 // new page for stories
@@ -26,7 +27,9 @@ class App extends Component {
         <Container>
             <Router>
               <Switch>
-                  <Route path='/' component={Home} />
+                  <Route exact path='/' component={Home} />
+                  <Route path='/story/:id' component={Story} />
+                  <Route path='/author/:email' component={Author} />
               </Switch>
             </Router>
         </Container>

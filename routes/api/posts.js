@@ -14,8 +14,15 @@ const Post = require('../../models/Post');
 // @desc Get all stories
 // @access Public
 
+
+//:userEmail
 router.get('/', (req, res) => {
-	console.log("Fetching posts");
+	// console.log("Fetching posts");
+
+	// console.log(req.params.userEmail);
+
+	// filter and return requests based on unique-User or userEmail
+
 	Post.find()
 		.sort({date: -1})
 		.then((items) => {
@@ -32,6 +39,7 @@ router.get('/', (req, res) => {
 							completeItem.imageData  = images[j].imageData;
 							completeItem._id  = items[i]._id;
 							completeItem.author  = items[i].author;
+							completeItem.authorEmail = items[i].authorEmail;
 							completeItem.title  = items[i].title;
 							completeItem.description  = items[i].description;
 							completeItem.read_duration  = items[i].read_duration;
@@ -56,7 +64,7 @@ router.get('/', (req, res) => {
 // @access Private
 
 router.post('/addPost', (req, res) => {
-	const { author, title, description, imageID } = req.body;
+	const { author, authorEmail, title, description, imageID } = req.body;
 	
 	console.log("I am trying to add a post");
 
@@ -65,6 +73,7 @@ router.post('/addPost', (req, res) => {
 
 	const newPost = new Post({
 		author,
+		authorEmail,
 		title,
 		description,
 		read_duration,

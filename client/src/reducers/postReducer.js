@@ -1,5 +1,5 @@
 import uuid from 'uuid';
-import { POST_SUCCESS, GET_ITEMS, ADD_ITEM, ITEMS_LOADING } from '../actions/types';
+import { POST_SUCCESS, GET_ITEMS, ADD_ITEM, ITEMS_LOADING, GET_STORY } from '../actions/types';
 
 const initialState = {
 	posts: [],
@@ -14,6 +14,12 @@ export default function(state = initialState, action) {
 				posts: action.payload,
 				loading: false
 			};
+		case GET_STORY:
+			return {
+				...state,
+				story: action.payload,
+				loading: false
+			}
 		case POST_SUCCESS:
 			localStorage.setItem('token', action.payload.token);
 			return {

@@ -63,7 +63,7 @@ export const register = ({ name, email, password }) => dispatch => {
 };
 
 // Login user for social auth
-export const social_auth = ({ name, email}) => dispatch => {
+export const social_auth = ({ name, email }) => dispatch => {
 	
 	// Headers
 	const config = {
