@@ -105,10 +105,37 @@ router.get('/story/:id', (req, res) => {
 	console.log(_id);
 
 	Post.find({_id:_id})
-		.then((item) => {
-			res.json(item);
-			console.log("received story items: ");
-			console.log(item);
+		.then((items) => {
+
+			console.log("Items are : " + items);
+			let imageIds = items.map(item => item.imageID);
+			Image.find({
+				'imageID': { $in: imageIds }
+			}).then((images)=>{
+				// console.log(images);
+				let completeItems = [];
+				for(let i=0; i<items.length; i++){
+					for(let j=0; j<images.length; j++){
+						if(items[i].imageID == images[j].imageID){
+							let completeItem = {};
+							completeItem.imageData  = images[j].imageData;
+							completeItem._id  = items[i]._id;
+							completeItem.author  = items[i].author;
+							completeItem.authorEmail = items[i].authorEmail;
+							completeItem.title  = items[i].title;
+							completeItem.description  = items[i].description;
+							completeItem.read_duration  = items[i].read_duration;
+							completeItem.imageID  = items[i].imageID;
+							completeItem.date  = items[i].date;
+
+							completeItems.push(completeItem);
+							break;
+						}
+					}
+				}
+
+				res.json(completeItems);
+			})
 
 		});
 });
