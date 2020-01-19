@@ -10,8 +10,7 @@ const SocialUserSchema = new Schema({
 	email: {
 		type: String,
 		required: true,
-		trim: true,
-		unique: true
+		trim: true
 	},
 	facebookProfileLink: {
 		type: String

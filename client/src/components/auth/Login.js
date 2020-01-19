@@ -69,9 +69,6 @@ class LoginModal extends Component {
 	    	email
 	    };
 
-	    // // i am setting social user data
-	    // sessionStorage.setItem("socialUserData", JSON.stringify(newUser));
-
 	    // Attempt to register
 	    this.props.social_auth(newUser);
 	}
@@ -90,9 +87,6 @@ class LoginModal extends Component {
 	    	name,
 	    	email
 	    };
-
-	    // i am setting social user data
-	    sessionStorage.setItem("socialUserData", JSON.stringify(newUser));
 
 	    // Attempt to register
 	    this.props.social_auth(newUser);

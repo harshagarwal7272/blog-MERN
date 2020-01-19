@@ -71,9 +71,6 @@ class RegisterModal extends Component {
 	    	email
 	    };
 
-	    // // i am setting social user data
-	    // sessionStorage.setItem("socialUserData", JSON.stringify(newUser));
-
 	    // Attempt to register
 	    this.props.social_auth(newUser);
 	}
@@ -84,6 +81,10 @@ class RegisterModal extends Component {
 		const name = response.name;
 		const email = response.email;
 
+		if (!name || !email) {
+	    	return;
+	    }
+
 	    this.setState({
 	    	name: name,
 	    	email: email
@@ -92,9 +93,6 @@ class RegisterModal extends Component {
 	    	name,
 	    	email
 	    };
-
-	    // i am setting social user data
-	    sessionStorage.setItem("socialUserData", JSON.stringify(newUser));
 
 	    // Attempt to register
 	    this.props.social_auth(newUser);
