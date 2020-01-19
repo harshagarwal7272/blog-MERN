@@ -17,8 +17,7 @@ const initialState = {
 	isLoading: false,
 	user: null,
 	socialAuth: false,
-	authorData: null,
-	authorExists: false
+	authorData: null
 };
 
 export default function(state = initialState, action) {
@@ -61,8 +60,7 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				isLoading: false,
-				authorData: action.payload,
-				authorExists: true
+				authorData: action.payload
 			}
 		case GET_AUTHOR_FAIL:
 			return {
