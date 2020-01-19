@@ -130,7 +130,10 @@ router.get('/author/:userEmail', (req, res) => {
 		.then((authorData) => {
 			console.log("author data : " + authorData);
 			res.json(authorData);
-		});
+		})
+		.catch((err)=>{
+			console.log("did not find user with email: "+userEmail);
+	});
 
 	// find the author details from the relevant users database 
 	// add an array in the users database so that the followers of the author can be added their

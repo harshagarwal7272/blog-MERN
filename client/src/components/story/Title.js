@@ -14,8 +14,19 @@ class Title extends Component {
 		console.log("ku akfhadojfhkjad");
 		this.props.getAuthorDetails(email);
 	}
+
+	static propTypes = {
+		auth: PropTypes.object.isRequired
+	}
 	
 	render() {
+
+		const { isAuthenticated, user } = this.props.auth;
+		const { story } = this.props.post;
+
+		let storyDetails = undefined;
+		if(story)
+			storyDetails = story[0];
 
 
 
@@ -25,9 +36,10 @@ class Title extends Component {
 					<a href="author.html"><img className="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal" /></a>
 				</div>
 				<div className="col-md-10">
-					<a className="link-dark" href="author.html">Sal</a><a href="#" className="btn follow">Follow</a>
+
+					<a className="link-dark" href={"/author/"+(storyDetails?storyDetails.authorEmail:"")}>{(storyDetails?storyDetails.author:"")}</a>{(isAuthenticated?<a href="#" className="btn follow">Follow</a>:<a></a>)}
 					<span className="author-description">Founder of WowThemes.net and creator of <b>"Mediumish"</b> theme that you're currently previewing. Developing professional premium themes, templates, plugins, scripts since 2012.</span>
-					<span className="post-date">22 July 2017</span><span className="dot"></span><span className="post-read">6 min read</span>
+					<span className="post-date">{(storyDetails?storyDetails.date.substring(0,10):"")}</span><span className="dot"></span><span className="post-read">{(storyDetails?storyDetails.read_duration:"")} min read</span>
 				</div>
 			</div>
 		);
@@ -39,7 +51,9 @@ Title.propTypes = {
 }
 
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
+	post: state.post,
+	auth: state.auth
 });
 
 export default connect(

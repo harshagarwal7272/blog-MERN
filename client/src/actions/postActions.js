@@ -42,10 +42,8 @@ export const getStory = ({ _id }) => ( dispatch, getState ) => {
 
 		console.log(" HI " + _id);
 
-		const body = JSON.stringify({ _id });
-
 		axios
-		.post('/api/posts/story', body, config)
+		.get('/api/posts/story/' + _id, config)
 		.then(res =>
 			dispatch({
 				type: GET_STORY,
@@ -81,7 +79,7 @@ export const getPosts = ({ userEmail }) => ( dispatch ) => {
 			})
 		)
 		.catch(err => {
-			dispatch(returnErrors(err.response, err.response.status));
+			dispatch(returnErrors(err.response, err.response));
 		});
 };
 

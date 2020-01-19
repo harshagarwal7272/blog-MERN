@@ -98,9 +98,8 @@ router.post('/addPost', (req, res) => {
 // @desc Get
 // @access Public
 
-router.post('/story', (req, res) => {
-	const { _id } = req.body;
-
+router.get('/story/:id', (req, res) => {
+	const _id = req.params.id;
 	console.log("This api is getting hit");
 
 	console.log(_id);
@@ -108,6 +107,9 @@ router.post('/story', (req, res) => {
 	Post.find({_id:_id})
 		.then((item) => {
 			res.json(item);
+			console.log("received story items: ");
+			console.log(item);
+
 		});
 });
 
