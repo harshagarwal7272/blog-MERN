@@ -64,10 +64,11 @@ router.post('/', (req, res) => {
 router.post('/social', (req, res) => {
 	console.log("I am in");
 
-	const { name, email } = req.body;
+	const { name, email, thumbnail } = req.body;
 
 	console.log(name);
 	console.log(email);
+	console.log(thumbnail);
 
 	const socialAuth = true;
 
@@ -85,7 +86,8 @@ router.post('/social', (req, res) => {
 						user: {
 							id: user.id,
 							name: user.name,
-							email: user.email
+							email: user.email,
+							thumbnail: user.thumbnail
 						}
 					});
 				}
@@ -96,7 +98,8 @@ router.post('/social', (req, res) => {
 		// add a check if it is facebook login, add the facebook profile link of the user
 		const newUser = new SocialUser({
 			name,
-			email
+			email,
+			thumbnail
 		});
 
 		newUser.save()
@@ -112,7 +115,8 @@ router.post('/social', (req, res) => {
 							user: {
 								id: user.id,
 								name: user.name,
-								email: user.email
+								email: user.email,
+								thumbnail: user.thumbnail
 							}
 						});
 					});
@@ -138,6 +142,40 @@ router.get('/author/:userEmail', (req, res) => {
 	// find the author details from the relevant users database 
 	// add an array in the users database so that the followers of the author can be added their
 
+});
+
+// change request to post
+router.post('/follow', (req,res) => {
+
+	const personToFollow = req.body.userToFollow;
+	const personWhoFollow = req.body.userWhoFollow;
+
+	console.log(personToFollow);
+	console.log(personWhoFollow);
+
+	SocialUser.update({
+		"email": personWhoFollow
+		},
+		{
+			$addToSet: {
+				"usersIFollow": personToFollow
+			}
+		}
+	)
+	.then(() => {console.log("waah ji waah");});
+
+	SocialUser.update({
+		"email": personToFollow
+		},
+		{
+			$addToSet: {
+				"usersWhoFollowMe": personWhoFollow
+			}
+		}
+	)
+	.then(() => {console.log("waah");})
+
+	res.json("Hi");
 });
 
 module.exports = router;

@@ -12,6 +12,15 @@ const SocialUserSchema = new Schema({
 		required: true,
 		trim: true
 	},
+	thumbnail: {
+		type: String
+	},
+	usersIFollow: {
+		type: [String]
+	},
+	usersWhoFollowMe: {
+		type: [String]
+	},
 	facebookProfileLink: {
 		type: String
 	}

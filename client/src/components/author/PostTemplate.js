@@ -12,8 +12,6 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 class PostTemplate extends Component {
 	render() {
 		const { posts } = this.props.post;
-		console.log("My ultimate posts are :-> ");
-		console.log(posts);
 
 		return (
 			<div className="container">

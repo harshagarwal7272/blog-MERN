@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import { getAuthorDetails } from '../../actions/authActions';
+import { getAuthorDetails, followUser } from '../../actions/authActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -15,14 +15,32 @@ class Title extends Component {
 		this.props.getAuthorDetails(email);
 	}
 
+	userFollow = () => {
+		const userToFollow = this.props.userEmail;
+		const { user } = this.props.auth;
+		const userWhoFollow = user.email;
+		const userFollowDetails = {
+			userToFollow: userToFollow,
+			userWhoFollow: userWhoFollow
+		}
+		this.props.followUser(userFollowDetails);
+	}
+
 	render() {
 		const { authorData } = this.props.auth;
 
 		let userDoesNotExist = true;
 		let authorName = '';
+		let authorImage = "https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x";
 
 		if (authorData && authorData[0] && authorData[0].email) {
 			authorName = authorData[0].name;
+			if (authorData[0].thumbnail) {
+				authorImage = authorData[0].thumbnail;
+			}
+			console.log("Image .... ");
+			console.log(authorData[0]);
+			console.log(authorImage);
 			userDoesNotExist = false;
 		}
 
@@ -54,11 +72,11 @@ class Title extends Component {
 										<span className="author-description">Founder of <a target="_blank" href="https://www.wowthemes.net">WowThemes.net</a> and creator of <strong>"Mediumish"</strong> theme that you're currently previewing. I professionally develop premium themes, templates & scripts since the Apocalypse (2012). You can reach me out on the social links below.</span>
 										<div className="sociallinks"><a  target="_blank" href="https://www.facebook.com/wowthemesnet/"><i className="fa fa-facebook"></i></a> <span className="dot"></span> <a target="_blank" href="https://plus.google.com/s/wowthemesnet/top"><i className="fa fa-google-plus"></i></a></div>
 										{
-											follow ? <a target="_blank" href="https://twitter.com/wowthemesnet" className="btn follow">Follow</a> : ''
+											follow ? <button className="btn follow" onClick={this.userFollow}>Follow</button> : ''
 										}
 									</div>
 									<div className="col-md-2 col-xs-12">
-										<img className="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal" />
+										<img className="author-thumb" src={ authorImage } alt="Sal" />
 									</div>
 								</div>
 							</div>
@@ -84,6 +102,7 @@ class Title extends Component {
 
 Title.propTypes = {
 	getAuthorDetails: PropTypes.func.isRequired,
+	followUser: PropTypes.func.isRequired,
 	auth: PropTypes.object.isRequired
 }
 
@@ -94,5 +113,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps, 
-	{ getAuthorDetails }
+	{ getAuthorDetails, followUser }
 )(Title);

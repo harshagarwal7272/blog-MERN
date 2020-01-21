@@ -65,7 +65,7 @@ export const register = ({ name, email, password }) => dispatch => {
 };
 
 // Login user for social auth
-export const social_auth = ({ name, email }) => dispatch => {
+export const social_auth = ({ name, email, thumbnail }) => dispatch => {
 	
 	// Headers
 	const config = {
@@ -74,7 +74,7 @@ export const social_auth = ({ name, email }) => dispatch => {
 		}
 	};
 
-	const body = JSON.stringify({ name, email });
+	const body = JSON.stringify({ name, email, thumbnail });
 
 	axios.post('/api/users/social', body, config)
 		.then(res => dispatch({
@@ -97,8 +97,6 @@ export const getAuthorDetails = ({ userEmail }) => dispatch => {
 		}
 	};
 
-	console.log("I am gerindoksnafkjdancf");
-
 	const body = JSON.stringify({ userEmail });
 
 	axios.get('/api/users/author/'+userEmail, body, config)
@@ -111,6 +109,26 @@ export const getAuthorDetails = ({ userEmail }) => dispatch => {
 			type: GET_AUTHOR_FAIL
 		});
 	})
+};
+
+// Follow a user
+export const followUser = ({ userToFollow, userWhoFollow }) => dispatch => {
+
+	const config = {
+		headers: {
+			'Content-type': 'application/json'
+		}
+	};
+
+	const body = JSON.stringify({ userToFollow, userWhoFollow });
+
+	axios.post('/api/users/follow', body, config)
+		.then(() => {
+			alert("User followed");
+		})
+		.catch(err => {
+			alert("Error in following user");
+		});
 };
 
 //Login user

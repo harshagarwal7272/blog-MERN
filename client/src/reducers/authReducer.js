@@ -8,7 +8,9 @@ import {
 	REGISTER_SUCCESS,
 	REGISTER_FAIL,
 	GET_AUTHOR_SUCCESS,
-	GET_AUTHOR_FAIL
+	GET_AUTHOR_FAIL,
+	FOLLOW_SUCCESSFUL,
+	FOLLOW_FAIL
 } from '../actions/types';
 
 const initialState = {

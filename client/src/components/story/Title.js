@@ -1,47 +1,33 @@
 import React, { Component } from 'react';
-import { getAuthorDetails } from '../../actions/authActions';
+import { followUser } from '../../actions/authActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
 class Title extends Component {
 
-	comonentDidMount() {
-		const { userEmail } = this.props;
-		const email = {
-			userEmail: userEmail
-		}
-		console.log("ku akfhadojfhkjad");
-		this.props.getAuthorDetails(email);
+	componentDidMount() {
 	}
 
 	static propTypes = {
 		auth: PropTypes.object.isRequired
 	}
+
+	userFollow = (userToFollow) => {
+		const { user } = this.props.auth;
+		const userWhoFollow = user.email;
+		const userFollowDetails = {
+			userToFollow: userToFollow,
+			userWhoFollow: userWhoFollow
+		}
+		console.log(userFollowDetails);
+		this.props.followUser(userFollowDetails);
+	}
 	
 	render() {
 
-		const { isAuthenticated, user, authorData } = this.props.auth;
+		const { isAuthenticated, user } = this.props.auth;
 		const { story } = this.props.post;
-
-		let userDoesNotExist = true;
-		
-		if (authorData && authorData[0] && authorData[0].email) {
-			userDoesNotExist = false;
-		}
-
-		let follow = true;
-
-		if (!userDoesNotExist) {
-			if (!isAuthenticated) {
-				follow = false;
-			} else {
-				if (user.email === authorData[0].email) {
-					follow = false;
-				}
-			}
-		}
-
 
 		let storyDetails = {};
 		if(story){
@@ -54,8 +40,15 @@ class Title extends Component {
 			storyDetails.date = "";
 		}
 
+		let follow = true;
 
-
+		if (!isAuthenticated) {
+			follow = false;
+		} else {
+			if (user.email === storyDetails.authorEmail) {
+				follow = false;
+			}
+		}
 
 		return (
 			<div className="row post-top-meta">
@@ -64,7 +57,7 @@ class Title extends Component {
 				</div>
 				<div className="col-md-10">
 
-					<a className="link-dark" href={"/author/"+storyDetails.authorEmail}>{storyDetails.author}</a>{(follow?<a href="#" className="btn follow">Follow</a>:<a></a>)}
+					<a className="link-dark" href={"/author/"+storyDetails.authorEmail}>{storyDetails.author}</a>{(follow?<button className="btn follow" onClick={() => this.userFollow(storyDetails.authorEmail)}>Follow</button>:"")}
 					<span className="author-description">Founder of WowThemes.net and creator of <b>"Mediumish"</b> theme that you're currently previewing. Developing professional premium themes, templates, plugins, scripts since 2012.</span>
 					<span className="post-date">{storyDetails.date}</span><span className="dot"></span><span className="post-read">{storyDetails.read_duration} min read</span>
 				</div>
@@ -74,7 +67,6 @@ class Title extends Component {
 }
 
 Title.propTypes = {
-	getAuthorDetails: PropTypes.func.isRequired,
 	auth: PropTypes.object.isRequired
 }
 
@@ -86,5 +78,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
 	mapStateToProps, 
-	{ getAuthorDetails }
+	{ followUser }
 )(Title);

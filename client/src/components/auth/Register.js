@@ -24,7 +24,8 @@ class RegisterModal extends Component {
 		name: '',
 		email: '',
 		password: '',
-		msg: null
+		msg: null,
+		thumbnail: null
 	};
 
 	static propTypes = {
@@ -56,19 +57,25 @@ class RegisterModal extends Component {
 
 	responseGoogle = (response) => {
 	    console.log("google console");
+
+	    console.log(response.profileObj.imageUrl);
+
 	    console.log(response.w3.ig);
 	    console.log(response.w3.U3);
 
 	    const name = response.w3.ig;
 	    const email = response.w3.U3;
+	    const thumbnail = response.profileObj.imageUrl;
 
 	    this.setState({
 	    	name: name,
-	    	email: email
+	    	email: email,
+	    	thumbnail: thumbnail
 	    });
 	    const newUser = {
 	    	name,
-	    	email
+	    	email,
+	    	thumbnail
 	    };
 
 	    // Attempt to register
@@ -77,21 +84,22 @@ class RegisterModal extends Component {
 
 	responseFacebook = (response) => {
 		console.log("facebook console");
-		console.log(response);
+
+		console.log(response.picture.data.url);
+
 		const name = response.name;
 		const email = response.email;
-
-		if (!name || !email) {
-	    	return;
-	    }
+		const thumbnail = response.picture.data.url;
 
 	    this.setState({
 	    	name: name,
-	    	email: email
+	    	email: email,
+	    	thumbnail: thumbnail
 	    });
 	    const newUser = {
 	    	name,
-	    	email
+	    	email,
+	    	thumbnail
 	    };
 
 	    // Attempt to register

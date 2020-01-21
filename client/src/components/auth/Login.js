@@ -23,7 +23,8 @@ class LoginModal extends Component {
 		modal: false,
 		email: '',
 		password: '',
-		msg: null
+		msg: null,
+		thumbnail: null
 	};
 
 	static propTypes = {
@@ -54,19 +55,25 @@ class LoginModal extends Component {
 
 	responseGoogle = (response) => {
 	    console.log("google console");
+
+	    console.log(response);
+
 	    console.log(response.w3.ig);
 	    console.log(response.w3.U3);
 
 	    const name = response.w3.ig;
 	    const email = response.w3.U3;
+	    const thumbnail = response.profileObj.imageUrl;
 
 	    this.setState({
 	    	name: name,
-	    	email: email
+	    	email: email,
+	    	thumbnail: thumbnail
 	    });
 	    const newUser = {
 	    	name,
-	    	email
+	    	email,
+	    	thumbnail
 	    };
 
 	    // Attempt to register
@@ -75,17 +82,22 @@ class LoginModal extends Component {
 
 	responseFacebook = (response) => {
 		console.log("facebook console");
+
 		console.log(response);
+
 		const name = response.name;
 		const email = response.email;
+		const thumbnail = response.picture.data.url;
 
 	    this.setState({
 	    	name: name,
-	    	email: email
+	    	email: email,
+	    	thumbnail: thumbnail
 	    });
 	    const newUser = {
 	    	name,
-	    	email
+	    	email,
+	    	thumbnail
 	    };
 
 	    // Attempt to register
