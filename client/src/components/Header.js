@@ -38,42 +38,44 @@ class Header extends Component {
 		const { isAuthenticated, user } = this.props.auth;
 
 		const authLinks = (
-			<Fragment>
-				<NavItem>
-					<Link to={'/author'}> Author </Link>
-				</NavItem>
-				<NavItem>
+			<ul className="navbar-nav ml-auto">
+				<li className="nav-item">
+				<a className="nav-link" href={"/author/"}>Author<span className="sr-only"></span></a>
+				</li>
+				<li className="nav-item">
 					<Post />
-				</NavItem>
-				<NavItem>
+				</li>
+				<li className="nav-item">
 					<Logout />
-				</NavItem>
-			</Fragment>
+				</li>
+			</ul>
 		);
 
 		const guestLinks = (
-			<Fragment>
-				<NavItem>
+			<ul className="navbar-nav ml-auto">
+				<li className="nav-item">
 					<Register />
-				</NavItem>
-				<NavItem>
+				</li>
+				<li className="nav-item">
 					<Login />
-				</NavItem>
-			</Fragment>
+				</li>
+			</ul>
 		);
 
 		return (
-			<Navbar color="dark" dark expand="sm" className="mb-5">
-				<Container>
-					<NavbarBrand href="/">Blog</NavbarBrand>
-					<NavbarToggler onClick={this.toggle} />
-					<Collapse isOpen={this.state.isOpen} navbar>
-						<Nav className="ml-auto" navbar>
-							{ isAuthenticated ? authLinks : guestLinks }
-						</Nav>
-					</Collapse>
-				</Container>
-			</Navbar>
+			<nav className="navbar navbar-toggleable-md navbar-light bg-white fixed-top mediumnavigation">
+				<button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+				<span className="navbar-toggler-icon"></span>
+				</button>
+				<div className="container" id="">
+					<a className="navbar-brand" href="/">
+					<img src="assets/img/logo.png" alt="logo" />
+					</a>
+					<div className="collapse navbar-collapse" id="navbarsExampleDefault">
+						{ isAuthenticated ? authLinks : guestLinks }						
+					</div>
+				</div>
+			</nav>
 		)
 	}
 }
