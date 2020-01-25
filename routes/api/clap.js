@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
     Clap.findOne({clapper_email:user_email,
         story_id:story_id
     }).then((item)=>{
-        console.log("cllllllllapppppppp");
+        console.log("clapping...................");
         console.log(item);
         if(item){
             //update existing clap items count by 1
@@ -40,11 +40,6 @@ router.post('/', (req, res) => {
             newClap.save();
         }
     })
-
-
-
-
-
 });
 
 

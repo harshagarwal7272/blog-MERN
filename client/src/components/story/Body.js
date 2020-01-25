@@ -26,23 +26,13 @@ class Body extends Component {
 		post: PropTypes.object.isRequired
 	}
 
-	handleClick = () => {
-		console.log("Hello");
-	}
-
-
-
 	clapFunc = () => {
 		const { story } = this.props.post;
 		let { user } = this.props.auth;
 
-		user = {};  //TODO: remove after login fix is done
-		user.email = "debarshi.choudhury1@gmail.com"; //TODO: remove after login fix is done
-
 		let story_id = "";
 		let user_email = "";
-		// console.log(story);
-		// console.log(user);
+
 		if(story){
 			story_id = story[0]._id;
 		}
@@ -89,10 +79,8 @@ class Body extends Component {
 	render() {
 		const { story } = this.props.post;
 		const { user } = this.props.auth;
-console.log(story);
 
 
-		// use the story._id to update the url 
 		return (
 			<div>
 				<div className="container">
