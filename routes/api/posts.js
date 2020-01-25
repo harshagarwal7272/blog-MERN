@@ -10,6 +10,9 @@ const auth = require('../../middleware/auth');
 //Post Model
 const Post = require('../../models/Post');
 
+//Clap Model
+const Clap = require('../../models/Clap');
+
 // @route api/posts
 // @desc Get all stories
 // @access Public
@@ -128,13 +131,34 @@ router.get('/story/:id', (req, res) => {
 							completeItem.imageID  = items[i].imageID;
 							completeItem.date  = items[i].date;
 
-							completeItems.push(completeItem);
-							break;
+
+							//find clap no. here and update completeItem
+							completeItem.clap_count = 0;
+							Clap.find({"story_id":_id})
+								.then((clap_items)=>{
+									let clap_cnt = 0;
+									clap_items.forEach((clapItem)=>{
+										clap_cnt = clap_cnt + clapItem.clap_count;
+									})
+
+									completeItem.clap_count = clap_cnt;
+
+									completeItems.push(completeItem);
+									res.json(completeItems);
+
+								})
+
+
+							// completeItems.push(completeItem);
+							// break;
 						}
 					}
 				}
 
-				res.json(completeItems);
+
+
+
+				// res.json(completeItems);
 			})
 
 		});

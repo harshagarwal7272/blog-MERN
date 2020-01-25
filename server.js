@@ -34,6 +34,7 @@ mongoose.connect(db, {
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/posts", require("./routes/api/posts"));
+app.use("/api/clap", require("./routes/api/clap"));
 app.use('/image', require("./routes/api/image"));
 
 // Serve static assets if in production
