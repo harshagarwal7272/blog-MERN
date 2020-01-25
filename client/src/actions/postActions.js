@@ -49,7 +49,7 @@ export const getStory = ({ _id }) => ( dispatch, getState ) => {
 				type: GET_STORY,
 				payload: res.data
 			})
-			)
+		)
 	}
 
 //create a new variant of getPosts 
