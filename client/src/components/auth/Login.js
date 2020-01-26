@@ -58,6 +58,10 @@ class LoginModal extends Component {
 
 	    console.log(response);
 
+	    if (response.error === "popup_closed_by_user") {
+	        return;
+	    }
+
 	    const name = response.profileObj.name;
 	    const email = response.profileObj.email;
 	    const thumbnail = response.profileObj.imageUrl;
@@ -80,25 +84,26 @@ class LoginModal extends Component {
 	responseFacebook = (response) => {
 		console.log("facebook console");
 
-		console.log(response);
+		if (response.status === "unknown") {
+		    return;
+		}
 
-		const name = response.name;
-		const email = response.email;
-		const thumbnail = response.picture.data.url;
+        const name = response.name;
+        const email = response.email;
+        const thumbnail = response.picture.data.url;
 
-	    this.setState({
-	    	name: name,
-	    	email: email,
-	    	thumbnail: thumbnail
-	    });
-	    const newUser = {
-	    	name,
-	    	email,
-	    	thumbnail
-	    };
-
-	    // Attempt to register
-	    this.props.social_auth(newUser);
+        this.setState({
+            name: name,
+            email: email,
+            thumbnail: thumbnail
+        });
+        const newUser = {
+            name,
+            email,
+            thumbnail
+        };
+        // Attempt to register
+        this.props.social_auth(newUser);
 
 	}
 

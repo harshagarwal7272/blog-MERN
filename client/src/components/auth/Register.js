@@ -58,7 +58,9 @@ class RegisterModal extends Component {
 	responseGoogle = (response) => {
 	    console.log("google console");
 
-	    console.log(response.profileObj.imageUrl);
+        if (response.error === "popup_closed_by_user") {
+            return;
+        }
 
 	    const name = response.profileObj.name;
         const email = response.profileObj.email;
@@ -82,12 +84,13 @@ class RegisterModal extends Component {
 	responseFacebook = (response) => {
 		console.log("facebook console");
 
-		console.log(response.picture.data.url);
+		if (response.status === "unknown") {
+		    return;
+		}
 
 		const name = response.name;
 		const email = response.email;
 		const thumbnail = response.picture.data.url;
-
 	    this.setState({
 	    	name: name,
 	    	email: email,
@@ -98,10 +101,8 @@ class RegisterModal extends Component {
 	    	email,
 	    	thumbnail
 	    };
-
 	    // Attempt to register
 	    this.props.social_auth(newUser);
-
 	}
 
 	toggle = () => {

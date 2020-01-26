@@ -24,8 +24,6 @@ router.post('/', (req, res) => {
 
 	const { userEmail } = req.body;
 
-	console.log(userEmail);
-
 	let criteria = {}
 
 	if (userEmail) {
@@ -38,12 +36,10 @@ router.post('/', (req, res) => {
 	Post.find(criteria)
 		.sort({date: -1})
 		.then((items) => {
-			console.log("Items are : " + items);
 			let imageIds = items.map(item => item.imageID);
 			Image.find({
 			    'imageID': { $in: imageIds }
 			}).then((images)=>{
-				// console.log(images);
 				let completeItems = [];
 				for(let i=0; i<items.length; i++){
 					for(let j=0; j<images.length; j++){
@@ -78,8 +74,6 @@ router.post('/', (req, res) => {
 
 router.post('/addPost', (req, res) => {
 	const { author, authorEmail, title, description, imageID } = req.body;
-	
-	console.log("I am trying to add a post");
 
 	let description_split = description.split(' ');
 	const read_duration = Math.ceil(((description_split.length) / 200));
@@ -103,19 +97,14 @@ router.post('/addPost', (req, res) => {
 
 router.get('/story/:id', (req, res) => {
 	const _id = req.params.id;
-	console.log("This api is getting hit");
-
-	console.log(_id);
 
 	Post.find({_id:_id})
 		.then((items) => {
 
-			console.log("Items are : " + items);
 			let imageIds = items.map(item => item.imageID);
 			Image.find({
 				'imageID': { $in: imageIds }
 			}).then((images)=>{
-				// console.log(images);
 				let completeItems = [];
 				for(let i=0; i<items.length; i++){
 					for(let j=0; j<images.length; j++){

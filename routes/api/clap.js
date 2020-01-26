@@ -20,14 +20,10 @@ router.post('/', (req, res) => {
     Clap.findOne({clapper_email:user_email,
         story_id:story_id
     }).then((item)=>{
-        console.log("clapping...................");
-        console.log(item);
+        console.log("clapping..................");
         if(item){
             //update existing clap items count by 1
-            console.log("the clap item is");
-            console.log(item);
             item.clap_count = item.clap_count + 1;
-
             item.save();
         }else{
             //create new clap item with count 1
@@ -36,12 +32,9 @@ router.post('/', (req, res) => {
                 story_id,
                 clap_count: 1
             });
-
             newClap.save();
         }
     })
 });
-
-
 
 module.exports = router;
