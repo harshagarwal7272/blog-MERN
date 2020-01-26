@@ -17,6 +17,8 @@ import { register, social_auth } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
+const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_ID;
+const FACEBOOK_API_KEY = process.env.REACT_APP_FACEBOOK_API_ID;
 
 class RegisterModal extends Component {
 	state = {
@@ -187,12 +189,12 @@ class RegisterModal extends Component {
 					</FormGroup>
 				</Form>
 				<GoogleLogin
-					clientId="1068239361892-dao96nieulbcm2otq3ihu1cfasfusc25.apps.googleusercontent.com"
+					clientId={GOOGLE_API_KEY}
 					buttonText="SignUp with Google"
 					onSuccess={this.responseGoogle}
 					onFailure={this.responseGoogle}/>
 				<FacebookLogin
-					appId="1062401724117024"
+					appId={FACEBOOK_API_KEY}
 					autoLoad={false}
 					fields="name,email,picture"
 					callback={this.responseFacebook}/>
