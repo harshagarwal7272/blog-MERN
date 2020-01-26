@@ -60,12 +60,9 @@ class RegisterModal extends Component {
 
 	    console.log(response.profileObj.imageUrl);
 
-	    console.log(response.w3.ig);
-	    console.log(response.w3.U3);
-
-	    const name = response.w3.ig;
-	    const email = response.w3.U3;
-	    const thumbnail = response.profileObj.imageUrl;
+	    const name = response.profileObj.name;
+        const email = response.profileObj.email;
+        const thumbnail = response.profileObj.imageUrl;
 
 	    this.setState({
 	    	name: name,

@@ -58,11 +58,8 @@ class LoginModal extends Component {
 
 	    console.log(response);
 
-	    console.log(response.w3.ig);
-	    console.log(response.w3.U3);
-
-	    const name = response.w3.ig;
-	    const email = response.w3.U3;
+	    const name = response.profileObj.name;
+	    const email = response.profileObj.email;
 	    const thumbnail = response.profileObj.imageUrl;
 
 	    this.setState({
