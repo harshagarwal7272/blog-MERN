@@ -55,11 +55,10 @@ router.post('/', (req, res) => {
 // @access Private
 
 router.get('/user', auth, (req, res) => {
+    console.log("User-agharsh-> ");
+    console.log(req.user.id);
 	SocialUser.findById(req.user.id)
-		.then(user => {
-		    console.log(user);
-		    res.json(user));
-		}
+		.then(user => res.json(user));
 });
 
 module.exports = router;
