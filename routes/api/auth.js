@@ -56,7 +56,10 @@ router.post('/', (req, res) => {
 
 router.get('/user', auth, (req, res) => {
 	SocialUser.findById(req.user.id)
-		.then(user => res.json(user));
+		.then(user => {
+		    console.log(user);
+		    res.json(user));
+		}
 });
 
 module.exports = router;
