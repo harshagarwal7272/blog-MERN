@@ -168,12 +168,8 @@ export const logout = () => {
 // Setup config/headers and token
 export const tokenConfig = (getState) => {
 	// Get token from localstorage
-	let token = getState().auth.token;
-	console.log("token + " + token);
-    if (!token) {
-        token = sessionStorage.getItem('token');
-    }
-    console.log("token + " + token);
+	const token = getState().auth.token;
+
 	// Headers
 	const config = {
 		headers: {
