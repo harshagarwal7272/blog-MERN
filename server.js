@@ -21,7 +21,7 @@ app.use(express.json());
 // app.use(multer({ dest: './client/public/uploads/stories' }).single('photo'));
 app.use('/uploads', express.static('uploads'));
 
-const db = config.get("mongoURI");
+const db = process.env.mongoURI || config.get("mongoURI");
 
 mongoose.connect(db, {
 		useNewUrlParser: true,
