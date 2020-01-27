@@ -181,12 +181,12 @@ class LoginModal extends Component {
 					</FormGroup>
 				</Form>
 				<GoogleLogin
-					clientId="GOOGLE_API_KEY"
+					clientId={GOOGLE_API_KEY}
 					buttonText="SignIn with Google"
 					onSuccess={this.responseGoogle}
 					onFailure={this.responseGoogle}/>
 				<FacebookLogin
-					appId="FACEBOOK_API_KEY"
+					appId={FACEBOOK_API_KEY}
 					autoLoad={false}
 					fields="name,email,picture"
 					callback={this.responseFacebook}/>
