@@ -41,7 +41,8 @@ router.post('/', (req, res) => {
 
 							jwt.sign(
 								{ id: user.id },
-								process.env.jwtSecret,//config.get('jwtSecret'),
+								process.env.jwtSecret,
+								//config.get('jwtSecret'),
 								{ expiresIn: 3600 },
 								(err, token) => {
 									if (err) throw err;
@@ -62,22 +63,15 @@ router.post('/', (req, res) => {
 });
 
 router.post('/social', (req, res) => {
-	console.log("I am in");
-
 	const { name, email, thumbnail } = req.body;
-
-	console.log(name);
-	console.log(email);
-	console.log(thumbnail);
-
 	const socialAuth = true;
-
 	SocialUser.findOne({email})
 	.then(user => {
 		if (user) {
 			jwt.sign(
 				{ id: user.id },
-				process.env.jwtSecret,//config.get('jwtSecret'),
+				process.env.jwtSecret,
+				//config.get('jwtSecret'),
 				{ expiresIn: 3600 },
 				(err, token) => {
 					if (err) throw err;
@@ -106,7 +100,8 @@ router.post('/social', (req, res) => {
 			.then(user => {
 				jwt.sign(
 					{ id: user.id },
-					process.env.jwtSecret,//config.get('jwtSecret'),
+					process.env.jwtSecret,
+					//config.get('jwtSecret'),
 					{ expiresIn: 3600 },
 					(err, token) => {
 						if (err) throw err;

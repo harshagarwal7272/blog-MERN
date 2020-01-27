@@ -31,7 +31,8 @@ router.post('/', (req, res) => {
 
 					jwt.sign(
 						{ id: user.id },
-						process.env.jwtSecret,//config.get('jwtSecret'),
+						process.env.jwtSecret,
+						//config.get('jwtSecret'),
 						{ expiresIn: 3600 },
 						(err, token) => {
 							if (err) throw err;
@@ -54,8 +55,6 @@ router.post('/', (req, res) => {
 // @access Private
 
 router.get('/user', auth, (req, res) => {
-	console.log("I get called");
-	
 	SocialUser.findById(req.user.id)
 		.then(user => res.json(user));
 });

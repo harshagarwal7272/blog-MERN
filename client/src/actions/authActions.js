@@ -19,10 +19,8 @@ import {
 export const loadUser = () => (dispatch, getState) => {
 	// User loading
 	dispatch({ type: USER_LOADING });
-	console.log("I am loaduser");
 
 	let userData = JSON.parse(sessionStorage.getItem('socialUserData'));
-	console.log(userData);
 	if (userData) {
 		dispatch({
 			type: USER_LOADED,
