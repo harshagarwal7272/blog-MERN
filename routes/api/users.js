@@ -157,7 +157,7 @@ router.post('/follow', (req,res) => {
 			}
 		}
 	)
-	.then(() => {console.log("waah ji waah");});
+	.then(() => {console.log("Follow success");});
 
 	SocialUser.update({
 		"email": personToFollow
@@ -168,7 +168,7 @@ router.post('/follow', (req,res) => {
 			}
 		}
 	)
-	.then(() => {console.log("waah");})
+	.then(() => {console.log("Follow success");})
 
 	res.json("Hi");
 });
