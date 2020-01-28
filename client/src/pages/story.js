@@ -11,7 +11,6 @@ class Story extends Component {
 	render() {
 			// get the ID for identifying the unique story
 			const { id } = this.props.match.params;
-			console.log("Hello ID : " + id);
 
 		return (
 			<div>

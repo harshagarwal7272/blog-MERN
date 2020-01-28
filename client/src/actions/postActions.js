@@ -40,8 +40,6 @@ export const getStory = ({ _id }) => ( dispatch, getState ) => {
 			}
 		}
 
-		console.log(" HI " + _id);
-
 		axios
 		.get('/api/posts/story/' + _id, config)
 		.then(res =>
@@ -55,11 +53,7 @@ export const getStory = ({ _id }) => ( dispatch, getState ) => {
 //create a new variant of getPosts 
 export const getPosts = ({ userEmail }) => ( dispatch ) => {
 
-	console.log("phew ");
-	console.log(userEmail);
-
 	dispatch(setItemsLoading());
-	console.log("I went asking for items");
 
 	// Headers
 	const config = {

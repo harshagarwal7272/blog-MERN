@@ -38,9 +38,6 @@ class Title extends Component {
 			if (authorData[0].thumbnail) {
 				authorImage = authorData[0].thumbnail;
 			}
-			console.log("Image .... ");
-			console.log(authorData[0]);
-			console.log(authorImage);
 			userDoesNotExist = false;
 		}
 

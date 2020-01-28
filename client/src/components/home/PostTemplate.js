@@ -24,11 +24,7 @@ class PostTemplate extends Component {
 	}
 
 	render() {
-
 		const { posts } = this.props.post;
-
-		console.log(typeof(posts));
-
 		return (
 				<Container>
 					<ListGroup>

@@ -119,12 +119,9 @@ router.post('/social', (req, res) => {
 router.get('/author/:userEmail', (req, res) => {
 
 	const userEmail = req.params.userEmail;
-	console.log("Do i ever get claled");
-	console.log(userEmail);
 
 	SocialUser.find({ "email": userEmail })
 		.then((authorData) => {
-			console.log("author data : " + authorData);
 			res.json(authorData);
 		})
 		.catch((err)=>{
@@ -141,9 +138,6 @@ router.post('/follow', (req,res) => {
 
 	const personToFollow = req.body.userToFollow;
 	const personWhoFollow = req.body.userWhoFollow;
-
-	console.log(personToFollow);
-	console.log(personWhoFollow);
 
 	SocialUser.update({
 		"email": personWhoFollow
