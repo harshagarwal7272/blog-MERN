@@ -9,6 +9,7 @@ import { loadUser } from './actions/authActions';
 import Home from './pages/home';
 import Story from './pages/story';
 import Author from './pages/author';
+import Profile from './pages/profile';
 
 // no automatic refresh of article upload.... fix it
 
@@ -28,6 +29,7 @@ class App extends Component {
                   <Route exact path='/' component={Home} />
                   <Route path='/story/:id' component={Story} />
                   <Route path='/author/:email' component={Author} />
+                  <Route path='/profile' component={Profile} />
               </Switch>
             </Router>
         </Container>

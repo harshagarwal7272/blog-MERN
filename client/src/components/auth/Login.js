@@ -106,7 +106,6 @@ class LoginModal extends Component {
         };
         // Attempt to register
         this.props.social_auth(newUser);
-
 	}
 
 
