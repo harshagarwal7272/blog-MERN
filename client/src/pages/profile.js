@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import Title from '../components/profile/Title';
 import Body from '../components/profile/Body';
 
-class Home extends Component {
+class Profile extends Component {
 	render() {
 		return (
 			<div>
@@ -20,4 +20,4 @@ class Home extends Component {
 	}
 }
 
-export default Home;
+export default Profile;

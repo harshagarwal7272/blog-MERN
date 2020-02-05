@@ -16,3 +16,5 @@ export const POST_SUCCESS = 'POST_SUCCESS';
 export const GET_STORY = 'GET_STORY';
 export const GET_AUTHOR_SUCCESS = 'GET_AUTHOR_SUCCESS';
 export const GET_AUTHOR_FAIL = 'GET_AUTHOR_FAIL';
+export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
+export const UPDATE_FAIL = 'UPDATE_FAIL';

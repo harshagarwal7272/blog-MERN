@@ -12,7 +12,9 @@ import {
 	REGISTER_SUCCESS,
 	REGISTER_FAIL,
 	GET_AUTHOR_SUCCESS,
-	GET_AUTHOR_FAIL
+	GET_AUTHOR_FAIL,
+	UPDATE_SUCCESS,
+	UPDATE_FAIL
 } from './types';
 
 // Check token and load user
@@ -129,6 +131,30 @@ export const followUser = ({ userToFollow, userWhoFollow }) => dispatch => {
 		});
 };
 
+export const updateProfile = ({ email, username, description }) => dispatch => {
+    const config = {
+    		headers: {
+    			'Content-type': 'application/json'
+    		}
+    };
+
+    //request body
+    const body = JSON.stringify({ email, username, description });
+
+    axios
+        .post('/api/users/updateProfile', body, config)
+        .then(res =>
+            dispatch({
+                type: UPDATE_SUCCESS
+            })
+        )
+        .catch(err => {
+            dispatch({
+                type: UPDATE_FAIL
+            });
+        });
+};
+
 //Login user
 export const login = ({ email, password }) => dispatch => {
 	const config = {
@@ -139,7 +165,6 @@ export const login = ({ email, password }) => dispatch => {
 
 	// request body
 	const body = JSON.stringify({ email, password });
-	console.log("I am doing a login");
 	axios
 		.post('/api/auth', body, config)
 		.then(res =>

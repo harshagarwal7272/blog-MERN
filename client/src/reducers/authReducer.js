@@ -10,7 +10,9 @@ import {
 	GET_AUTHOR_SUCCESS,
 	GET_AUTHOR_FAIL,
 	FOLLOW_SUCCESSFUL,
-	FOLLOW_FAIL
+	FOLLOW_FAIL,
+	UPDATE_SUCCESS,
+	UPDATE_FAIL
 } from '../actions/types';
 
 const initialState = {
@@ -68,6 +70,11 @@ export default function(state = initialState, action) {
 				...state,
 				isLoading: false
 			}
+		case UPDATE_SUCCESS:
+		case UPDATE_FAIL:
+		    return {
+		        ...state
+		    }
 		default:
 			return state;
 	}

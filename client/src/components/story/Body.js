@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
 import { getStory } from '../../actions/postActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import PostTemplate from './PostTemplate';
 import { FacebookShareButton } from 'react-share';
 import axios from "axios";
-import {GET_STORY, POST_SUCCESS} from "../../actions/types";
 import Clap from "./Clap";
-import {returnErrors} from "../../actions/errorActions";
 
 let clapCount = 0;
 

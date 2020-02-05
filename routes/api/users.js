@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
+const auth = require('../../middleware/auth');
 
 //User Model
 const User = require('../../models/User');
@@ -133,7 +134,6 @@ router.get('/author/:userEmail', (req, res) => {
 
 });
 
-// change request to post
 router.post('/follow', (req,res) => {
 
 	const personToFollow = req.body.userToFollow;
@@ -161,13 +161,25 @@ router.post('/follow', (req,res) => {
 	)
 	.then(() => {console.log("Follow success");})
 
-	res.json("Hi");
+	res.json("-");
+});
+
+// add/update profileDetails
+router.post('/updateProfile', (req, res) => {
+
+    const email = req.body.email;
+    const username = req.body.username;
+    const desc = req.body.description;
+
+    console.log(req.body);
+
+    // update the details of user in the user database based on the email
+    // do not update the username, it can only be allowed to enter at the first time,
+    // else they will be assigned a random username
+    // after that the user cannot change their username,
+
+    res.json("-");
+
 });
 
 module.exports = router;
-
-// get all the posts written by a author unique by email ID
-// Post.find({authorEmail:"harshagarwal7272@gmail.com"})
-// 		.then((items) => {
-// 			res.json(items);
-// 		})

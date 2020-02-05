@@ -117,70 +117,70 @@ class Clap extends Component {
 
         return (
             <div>
-                <div class="canvas">
-                    <div id="totalCounter" class="total-counter"></div>
+                <div className="canvas">
+                    <div id="totalCounter" className="total-counter"></div>
 
-                    <div id="clap" class="clap-container">
-                        <i class="clap-icon fa fa-hand-paper-o"></i>
+                    <div id="clap" className="clap-container">
+                        <i className="clap-icon fa fa-hand-paper-o"></i>
                     </div>
 
-                    <div id="clicker" class="click-counter">
-                        <span class="counter"></span>
+                    <div id="clicker" className="click-counter">
+                        <span className="counter"></span>
                     </div>
 
-                    <div id="sonar-clap" class="clap-container-sonar"></div>
+                    <div id="sonar-clap" className="clap-container-sonar"></div>
 
-                    <div id="particles" class="particles-container">
-                        <div class="triangle">
-                            <div class="square"></div>
+                    <div id="particles" className="particles-container">
+                        <div className="triangle">
+                            <div className="square"></div>
                         </div>
-                        <div class="triangle">
-                            <div class="square"></div>
+                        <div className="triangle">
+                            <div className="square"></div>
                         </div>
-                        <div class="triangle">
-                            <div class="square"></div>
+                        <div className="triangle">
+                            <div className="square"></div>
                         </div>
-                        <div class="triangle">
-                            <div class="square"></div>
+                        <div className="triangle">
+                            <div className="square"></div>
                         </div>
-                        <div class="triangle">
-                            <div class="square"></div>
-                        </div>
-                    </div>
-
-                    <div id="particles-2" class="particles-container">
-                        <div class="triangle">
-                            <div class="square"></div>
-                        </div>
-                        <div class="triangle">
-                            <div class="square"></div>
-                        </div>
-                        <div class="triangle">
-                            <div class="square"></div>
-                        </div>
-                        <div class="triangle">
-                            <div class="square"></div>
-                        </div>
-                        <div class="triangle">
-                            <div class="square"></div>
+                        <div className="triangle">
+                            <div className="square"></div>
                         </div>
                     </div>
 
-                    <div id="particles-3" class="particles-container">
-                        <div class="triangle">
-                            <div class="square"></div>
+                    <div id="particles-2" className="particles-container">
+                        <div className="triangle">
+                            <div className="square"></div>
                         </div>
-                        <div class="triangle">
-                            <div class="square"></div>
+                        <div className="triangle">
+                            <div className="square"></div>
                         </div>
-                        <div class="triangle">
-                            <div class="square"></div>
+                        <div className="triangle">
+                            <div className="square"></div>
                         </div>
-                        <div class="triangle">
-                            <div class="square"></div>
+                        <div className="triangle">
+                            <div className="square"></div>
                         </div>
-                        <div class="triangle">
-                            <div class="square"></div>
+                        <div className="triangle">
+                            <div className="square"></div>
+                        </div>
+                    </div>
+
+                    <div id="particles-3" className="particles-container">
+                        <div className="triangle">
+                            <div className="square"></div>
+                        </div>
+                        <div className="triangle">
+                            <div className="square"></div>
+                        </div>
+                        <div className="triangle">
+                            <div className="square"></div>
+                        </div>
+                        <div className="triangle">
+                            <div className="square"></div>
+                        </div>
+                        <div className="triangle">
+                            <div className="square"></div>
                         </div>
                     </div>
 

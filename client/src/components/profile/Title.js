@@ -4,7 +4,7 @@ class Title extends Component {
     render() {
         return (
             <div>
-                Title
+                <h1>Fill Your Profile</h1>
             </div>
         );
     }

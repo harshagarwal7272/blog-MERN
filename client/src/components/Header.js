@@ -1,22 +1,10 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import Register from './auth/Register';
 import Login from './auth/Login';
 import Logout from './auth/Logout';
 import Post from './post/AddPost';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-	Collapse,
-	Navbar,
-	NavbarToggler,
-	NavbarBrand,
-	Nav,
-	NavItem,
-	Container
-} from 'reactstrap';
-import {
-	Link
-} from 'react-router-dom';
 
 class Header extends Component {
 
