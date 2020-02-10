@@ -17,8 +17,6 @@ const Clap = require('../../models/Clap');
 // @desc Get all stories
 // @access Public
 
-
-//:userEmail
 router.post('/', (req, res) => {
 	console.log("Fetching posts");
 
@@ -32,9 +30,10 @@ router.post('/', (req, res) => {
 		}
 	}
 	// filter and return requests based on unique-User or userEmail
+	// sorted in reverse by number of claps.
 
 	Post.find(criteria)
-		.sort({date: -1})
+		.sort({clapsReceived: -1})
 		.then((items) => {
 			let imageIds = items.map(item => item.imageID);
 			Image.find({
@@ -67,6 +66,59 @@ router.post('/', (req, res) => {
 		})
 });
 
+// fetching similar posts
+router.post('/similarPosts', (req, res) => {
+	console.log("Fetching similar posts");
+
+	const { username } = req.body;
+
+    console.log(username);
+
+    // take the people who i follow instead of the username and show their results on the page.
+
+	let criteria = {}
+
+	if (username) {
+		criteria = {
+			authorUserName: username
+		}
+	}
+	// filter and return requests based on unique-User or userEmail
+	// sorted in reverse by number of claps.
+
+	Post.find(criteria)
+		.sort({clapsReceived: -1})
+		.then((items) => {
+			let imageIds = items.map(item => item.imageID);
+			Image.find({
+			    'imageID': { $in: imageIds }
+			}).then((images)=>{
+				let completeItems = [];
+				for(let i=0; i<items.length; i++){
+					for(let j=0; j<images.length; j++){
+						if(items[i].imageID == images[j].imageID){
+							let completeItem = {};
+							completeItem.imageData  = images[j].imageData;
+							completeItem._id  = items[i]._id;
+							completeItem.author  = items[i].author;
+							completeItem.authorEmail = items[i].authorEmail;
+							completeItem.authorUserName = items[i].authorUserName;
+							completeItem.title  = items[i].title;
+							completeItem.description  = items[i].description;
+							completeItem.read_duration  = items[i].read_duration;
+							completeItem.imageID  = items[i].imageID;
+							completeItem.date  = items[i].date;
+
+							completeItems.push(completeItem);
+							break;
+						}
+					}
+				}
+
+				res.json(completeItems);
+			})
+		})
+});
 
 
 // @route POST api/posts

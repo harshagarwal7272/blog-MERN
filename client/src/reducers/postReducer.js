@@ -1,7 +1,8 @@
-import { POST_SUCCESS, GET_ITEMS, ADD_ITEM, ITEMS_LOADING, GET_STORY } from '../actions/types';
+import { POST_SUCCESS, GET_ITEMS, ADD_ITEM, ITEMS_LOADING, GET_STORY, GET_SIMILAR_ITEMS } from '../actions/types';
 
 const initialState = {
 	posts: [],
+	similarPosts: [],
 	loading: false
 }
 
@@ -13,6 +14,12 @@ export default function(state = initialState, action) {
 				posts: action.payload,
 				loading: false
 			};
+		case GET_SIMILAR_ITEMS:
+		    return {
+		        ...state,
+		        similarPosts: action.payload,
+		        loading: false
+		    }
 		case GET_STORY:
 			return {
 				...state,

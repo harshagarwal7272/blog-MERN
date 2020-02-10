@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { POST_SUCCESS, GET_ITEMS, ITEMS_LOADING, GET_STORY } from './types';
+import { POST_SUCCESS, GET_ITEMS, ITEMS_LOADING, GET_STORY, GET_SIMILAR_ITEMS } from './types';
 import { returnErrors } from './errorActions';
 import { tokenConfig } from './authActions';
 
@@ -75,6 +75,19 @@ export const getPosts = ({ username }) => ( dispatch ) => {
 		.catch(err => {
 			dispatch(returnErrors(err.response, err.response));
 		});
+
+	axios
+		.post('/api/posts/similarPosts', body, config)
+		.then(res =>
+			dispatch({
+				type: GET_SIMILAR_ITEMS,
+				payload: res.data
+			})
+		)
+		.catch(err => {
+			dispatch(returnErrors(err.response, err.response));
+		});
+
 };
 
 export const setItemsLoading = () => {

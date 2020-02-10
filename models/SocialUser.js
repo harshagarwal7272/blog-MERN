@@ -23,6 +23,10 @@ const SocialUserSchema = new Schema({
 	thumbnail: {
 		type: String
 	},
+	clapsReceived: {
+	    type: Number,
+	    default: 0
+	},
 	usersIFollow: {
 		type: [String]
 	},
@@ -31,7 +35,11 @@ const SocialUserSchema = new Schema({
 	},
 	facebookProfileLink: {
 		type: String
-	}
+	},
+	date: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 module.exports = SocialUser = mongoose.model('socialuser', SocialUserSchema);

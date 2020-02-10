@@ -31,10 +31,12 @@ class Title extends Component {
 
 		let userDoesNotExist = true;
 		let authorName = '';
+		let authorDesc = '';
 		let authorImage = "https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x";
 
 		if (authorData && authorData[0] && authorData[0].email) {
 			authorName = authorData[0].name;
+			authorDesc = authorData[0].authorDesc;
 			if (authorData[0].thumbnail) {
 				authorImage = authorData[0].thumbnail;
 			}
@@ -66,7 +68,7 @@ class Title extends Component {
 								<div className="row post-top-meta authorpage">
 									<div className="col-md-10 col-xs-12">
 										<h1>{ authorName }</h1>
-										<span className="author-description">Founder of <a target="_blank" href="https://www.wowthemes.net">WowThemes.net</a> and creator of <strong>"Mediumish"</strong> theme that you're currently previewing. I professionally develop premium themes, templates & scripts since the Apocalypse (2012). You can reach me out on the social links below.</span>
+										<span className="author-description">{ authorDesc }</span>
 										<div className="sociallinks"><a  target="_blank" href="https://www.facebook.com/wowthemesnet/"><i className="fa fa-facebook"></i></a> <span className="dot"></span> <a target="_blank" href="https://plus.google.com/s/wowthemesnet/top"><i className="fa fa-google-plus"></i></a></div>
 										{
 											follow ? <button className="btn follow" onClick={this.userFollow}>Follow</button> : ''

@@ -53,13 +53,16 @@ class Title extends Component {
 		return (
 			<div className="row post-top-meta">
 				<div className="col-md-2">
-					<a href={"/author/"+storyDetails.authorEmail}><img className="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal" /></a>
+					<a href={"/author/"+storyDetails.authorUserName}><img className="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal" /></a>
 				</div>
 				<div className="col-md-10">
-
-					<a className="link-dark" href={"/author/"+storyDetails.authorEmail}>{storyDetails.author}</a>{(follow?<button className="btn follow" onClick={() => this.userFollow(storyDetails.authorEmail)}>Follow</button>:"")}
-					<span className="author-description">Founder of WowThemes.net and creator of <b>"Mediumish"</b> theme that you're currently previewing. Developing professional premium themes, templates, plugins, scripts since 2012.</span>
-					<span className="post-date">{storyDetails.date}</span><span className="dot"></span><span className="post-read">{storyDetails.read_duration} min read</span>
+					<a className="link-dark" href={"/author/"+storyDetails.authorUserName}>{storyDetails.author}</a>
+					<br/>
+					{(follow?<button className="btn follow" onClick={() => this.userFollow(storyDetails.authorEmail)}>Follow</button>:"")}
+					<br/>
+					<span className="post-date">{storyDetails.date}</span><span className="dot"></span>
+					<br/>
+					<span className="post-read">{storyDetails.read_duration} min read</span>
 				</div>
 			</div>
 		);

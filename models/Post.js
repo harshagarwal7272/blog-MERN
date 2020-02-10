@@ -31,6 +31,10 @@ const PostSchema = new Schema({
 		type: String,
 		required: true
 	},
+	clapsReceived: {
+	    type: Number,
+	    default: 0
+	},
 	date: {
 		type: Date,
 		default: Date.now
