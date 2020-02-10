@@ -17,7 +17,7 @@ class PostTemplate extends Component {
 			<div className="container">
 				<ListGroup>
 					<TransitionGroup className="listrecent listrelated">
-					{posts.map(({ _id, author, authorEmail, title, description, read_duration, date, imageData }) => (
+					{posts.map(({ _id, author, authorEmail, authorUserName, title, description, read_duration, date, imageData }) => (
 						<CSSTransition key={_id} timeout={0}>
 							<ListGroupItem>
 								<div className="authorpostbox">
@@ -31,7 +31,7 @@ class PostTemplate extends Component {
 												<div className="metafooter">
 													<div className="wrapfooter">
 													<span className="meta-footer-thumb">
-													<a href={ "/author/" + authorEmail }><img className="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal" /></a>
+													<a href={ "/author/" + authorUserName }><img className="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal" /></a>
 													</span>
 													<span className="author-meta">
 													<span className="post-name"><a href="author.html">{ author }</a></span><br/>

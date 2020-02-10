@@ -7,10 +7,10 @@ import PostTemplate from './PostTemplate';
 class Body extends Component {
 
 	componentDidMount() {
-		const email = {
-			userEmail: this.props.userEmail
+		const userName = {
+			username: this.props.username
 		}
-		this.props.getPosts(email);
+		this.props.getPosts(userName);
 	}
 
 	render() {
@@ -22,12 +22,12 @@ class Body extends Component {
 			userDoesNotExist = false;
 		}
 
-		const email = this.props.userEmail;
+		const username = this.props.username;
 
 		const userExists = (
 			<Fragment>
 				<div className="graybg authorpage">
-					<PostTemplate userEmail={this.props.userEmail} />
+					<PostTemplate />
 				</div>
 				<div className="container margtop3rem">
 				<a className="twitter-grid" href="https://twitter.com/TwitterDev/timelines/539487832448843776">WowThemesNet Tweets</a> <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>

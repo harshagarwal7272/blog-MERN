@@ -22,13 +22,13 @@ const Clap = require('../../models/Clap');
 router.post('/', (req, res) => {
 	console.log("Fetching posts");
 
-	const { userEmail } = req.body;
+	const { username } = req.body;
 
 	let criteria = {}
 
-	if (userEmail) {
+	if (username) {
 		criteria = {
-			authorEmail: userEmail
+			authorUserName: username
 		}
 	}
 	// filter and return requests based on unique-User or userEmail
@@ -49,6 +49,7 @@ router.post('/', (req, res) => {
 							completeItem._id  = items[i]._id;
 							completeItem.author  = items[i].author;
 							completeItem.authorEmail = items[i].authorEmail;
+							completeItem.authorUserName = items[i].authorUserName;
 							completeItem.title  = items[i].title;
 							completeItem.description  = items[i].description;
 							completeItem.read_duration  = items[i].read_duration;
@@ -73,7 +74,7 @@ router.post('/', (req, res) => {
 // @access Private
 
 router.post('/addPost', (req, res) => {
-	const { author, authorEmail, title, description, imageID } = req.body;
+	const { author, authorEmail, authorUserName, title, description, imageID } = req.body;
 
 	let description_split = description.split(' ');
 	const read_duration = Math.ceil(((description_split.length) / 200));
@@ -81,6 +82,7 @@ router.post('/addPost', (req, res) => {
 	const newPost = new Post({
 		author,
 		authorEmail,
+		authorUserName,
 		title,
 		description,
 		read_duration,
@@ -114,6 +116,7 @@ router.get('/story/:id', (req, res) => {
 							completeItem._id  = items[i]._id;
 							completeItem.author  = items[i].author;
 							completeItem.authorEmail = items[i].authorEmail;
+							completeItem.authorUserName = items[i].authorUserName;
 							completeItem.title  = items[i].title;
 							completeItem.description  = items[i].description;
 							completeItem.read_duration  = items[i].read_duration;

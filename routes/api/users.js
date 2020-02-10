@@ -117,16 +117,16 @@ router.post('/social', (req, res) => {
 	});
 });
 
-router.get('/author/:userEmail', (req, res) => {
+router.get('/author/:username', (req, res) => {
 
-	const userEmail = req.params.userEmail;
+	const username = req.params.username;
 
-	SocialUser.find({ "email": userEmail })
+	SocialUser.find({ "username": username })
 		.then((authorData) => {
 			res.json(authorData);
 		})
 		.catch((err)=>{
-			console.log("did not find user with email: "+userEmail);
+			console.log("did not find user with username: "+username);
 	});
 
 	// find the author details from the relevant users database 
@@ -140,7 +140,7 @@ router.post('/follow', (req,res) => {
 	const personWhoFollow = req.body.userWhoFollow;
 
 	SocialUser.update({
-		"email": personWhoFollow
+		"username": personWhoFollow
 		},
 		{
 			$addToSet: {
@@ -151,7 +151,7 @@ router.post('/follow', (req,res) => {
 	.then(() => {console.log("Follow success");});
 
 	SocialUser.update({
-		"email": personToFollow
+		"username": personToFollow
 		},
 		{
 			$addToSet: {
@@ -162,6 +162,7 @@ router.post('/follow', (req,res) => {
 	.then(() => {console.log("Follow success");})
 
 	res.json("-");
+	// disable follow button when a user is already followd
 });
 
 // add/update profileDetails
@@ -172,6 +173,23 @@ router.post('/updateProfile', (req, res) => {
     const desc = req.body.description;
 
     console.log(req.body);
+
+    // check if the username already exists, if yes add a error msg and do not redirect
+
+    SocialUser.update({
+        "email": email
+        },
+        {
+            $set: {
+                "username": username,
+                "authorDesc": desc
+            }
+        }
+    )
+    .then(() => {console.log("User details update success");})
+
+
+    // add proper then function and error catch function and redirect to the home page after user details are updated
 
     // update the details of user in the user database based on the email
     // do not update the username, it can only be allowed to enter at the first time,

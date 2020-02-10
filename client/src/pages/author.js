@@ -10,14 +10,14 @@ class Author extends Component {
 	render() {
 
 		// get the email for identifying the unique author
-		const { email } = this.props.match.params;
+		const { username } = this.props.match.params;
 		
 		return (
 			<div>
 				<Header />
 					<div className="container">
-						<Title userEmail={email} />
-						<Body userEmail={email} />
+						<Title username={username} />
+						<Body username={username} />
 					</div>
 				<Footer />
 			</div>

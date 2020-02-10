@@ -65,12 +65,14 @@ class AddPost extends Component {
 		const { user, isAuthenticated } = this.props.auth;
 		const author = user.name;
 		const authorEmail = user.email;
+		const authorUserName = user.username;
 		const { title, description, imageID } = this.state;
 
 		//Create post object
 		const newPost = {
 			author,
 			authorEmail,
+			authorUserName,
 			title,
 			description,
 			imageID

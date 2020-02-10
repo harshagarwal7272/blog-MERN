@@ -28,7 +28,7 @@ class App extends Component {
               <Switch>
                   <Route exact path='/' component={Home} />
                   <Route path='/story/:id' component={Story} />
-                  <Route path='/author/:email' component={Author} />
+                  <Route path='/author/:username' component={Author} />
                   <Route path='/profile' component={Profile} />
               </Switch>
             </Router>

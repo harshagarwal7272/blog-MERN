@@ -8,17 +8,17 @@ import PropTypes from 'prop-types';
 class Title extends Component {
 
 	componentDidMount() {
-		const { userEmail } = this.props;
-		const email = {
-			userEmail: userEmail
+		const { username } = this.props;
+		const userName = {
+			username: username
 		}
-		this.props.getAuthorDetails(email);
+		this.props.getAuthorDetails(userName);
 	}
 
 	userFollow = () => {
-		const userToFollow = this.props.userEmail;
+		const userToFollow = this.props.username;
 		const { user } = this.props.auth;
-		const userWhoFollow = user.email;
+		const userWhoFollow = user.username;
 		const userFollowDetails = {
 			userToFollow: userToFollow,
 			userWhoFollow: userWhoFollow

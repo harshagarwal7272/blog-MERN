@@ -4,10 +4,10 @@ import { returnErrors } from './errorActions';
 import { tokenConfig } from './authActions';
 
 // Add post
-export const addPost = ({ author, authorEmail, title, description, imageID }) => (dispatch, getState) => {
+export const addPost = ({ author, authorEmail, authorUserName, title, description, imageID }) => (dispatch, getState) => {
 
 	// request body
-	const body = JSON.stringify({ author, authorEmail, title, description, imageID });
+	const body = JSON.stringify({ author, authorEmail, authorUserName, title, description, imageID });
 
 	// Headers
 	const config = {
@@ -51,7 +51,7 @@ export const getStory = ({ _id }) => ( dispatch, getState ) => {
 	}
 
 //create a new variant of getPosts 
-export const getPosts = ({ userEmail }) => ( dispatch ) => {
+export const getPosts = ({ username }) => ( dispatch ) => {
 
 	dispatch(setItemsLoading());
 
@@ -62,7 +62,7 @@ export const getPosts = ({ userEmail }) => ( dispatch ) => {
 		}
 	}
 
-	const body = JSON.stringify({ userEmail });
+	const body = JSON.stringify({ username });
 
 	axios
 		.post('/api/posts', body, config)

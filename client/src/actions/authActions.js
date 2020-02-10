@@ -89,7 +89,7 @@ export const social_auth = ({ name, email, thumbnail }) => dispatch => {
 };
 
 // Get author details
-export const getAuthorDetails = ({ userEmail }) => dispatch => {
+export const getAuthorDetails = ({ username }) => dispatch => {
 	// Headers
 	const config = {
 		headers: {
@@ -97,9 +97,9 @@ export const getAuthorDetails = ({ userEmail }) => dispatch => {
 		}
 	};
 
-	const body = JSON.stringify({ userEmail });
+	const body = JSON.stringify({ username });
 
-	axios.get('/api/users/author/'+userEmail, body, config)
+	axios.get('/api/users/author/'+username, body, config)
 		.then(res => dispatch({
 		type: GET_AUTHOR_SUCCESS,
 		payload: res.data

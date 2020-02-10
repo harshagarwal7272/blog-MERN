@@ -12,6 +12,14 @@ const SocialUserSchema = new Schema({
 		required: true,
 		trim: true
 	},
+	username: {
+	    type: String,
+	    trim: true
+	},
+	authorDesc: {
+	    type: String,
+	    trim: true
+	},
 	thumbnail: {
 		type: String
 	},
